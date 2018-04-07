@@ -65,7 +65,6 @@
       if ($row = mysqli_fetch_assoc($verify_login)) {
         $_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
         header("Location: http://167.99.168.175/index.php");
-        exit();
       }
       else {
         echo "<script type=\"text/javascript\">
