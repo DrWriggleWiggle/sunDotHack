@@ -176,7 +176,7 @@ echo "<h2>Logged in as $name.</h2>";
           ?>
           <option value="1">Friend1</option>
         </select>
-        <input type="submit" value="Add Event">
+        <input type="submit" name="submit_add_event" value="Add Event">
       </form>
   </div>
   </div>
