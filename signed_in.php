@@ -4,6 +4,30 @@ $name = $_SESSION['user'];
 echo "<h2>Logged in as $name.</h2>";
 ?>
 
+<!-- Style sheet for modal form -->
+<style>
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: grba(0,0,0,0.4);
+}
+
+.modal-content{
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+</style>
+
 <!-- Logout form -->
 <form action="index.php" method="post">
   <div>
