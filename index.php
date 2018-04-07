@@ -12,6 +12,7 @@ if (isset($_SESSION['user'])) { // if the user is logged in
   }
   require_once("signed_in.php");
 } else {
+  echo "<h1>Fail</h1>";
   require_once("signed_out.php");
 }
 ?>
