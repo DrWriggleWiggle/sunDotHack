@@ -201,10 +201,37 @@ echo "<h2>Logged in as $name.</h2>";
     }
   </script>
   <?php
+  function createEvent() {
+    $event_name = $_POST['event_name'];
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+    $start_time = $_POST['start_time'];
+    $end_time = $_POST['end_time'];
+    $location = $_POST['location'];
+    $invite_list = $_POST['invite_list'];
+
+    $start_date_format = date("Y-m-d", strtotime($start_date));
+    $end_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
+
+    // create event
+    query("INSERT INTO events (owner, name, startDate, endDate, location)
+           VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date_format', '$end_date_format', '$location');
+      ");
+
+    // invite people to event
+    foreach ($invite_list as $invitee) {
+      $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['event'] . "' AND accepted='" . $events['accepted'] . "'");
+      if (count($test) == 0) {
+        query(
+          "INSERT INTO actions (member, event, accepted)
+          VALUES ('$invitee', '" . $events['eventId'] . "', '0');"
+        );
+      }
+    }
+  }
+
   if (isset($_POST['submit_add_event'])) {
     echo "<h1>It IS set</h1>";
-  } else {
-    echo "<h1>It is not set</h1>";
   }
   ?>
 </div>
