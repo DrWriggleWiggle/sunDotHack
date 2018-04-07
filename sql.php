@@ -7,14 +7,6 @@
     return $result;
   }
 
-  function createAccount($first_name, $last_name, $email, $password) {
-    query(
-      "INSERT INTO members (firstName, lastName, email, password)
-      VALUES ('$first_name', '$last_name', '$email', SHA('$password'));
-      "
-    );
-  }
-
   function getTable($table) {
     $q = "SELECT * FROM $table";
     $result = query($q);

@@ -25,7 +25,11 @@ if (isset($_POST['submit_login'])) {
   $last_name = $_POST["lastName"];
   $email = $_POST["email"];
   $password = $_POST["password"];
-  createAccount($first_name, $last_name, $email, $password);
+  query(
+    "INSERT INTO members (firstName, lastName, email, password)
+    VALUES ('$first_name', '$last_name', '$email', SHA('$password'));
+    "
+  );
   header("Refresh:0");
 }
 ?>
