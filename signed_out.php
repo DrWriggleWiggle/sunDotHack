@@ -15,6 +15,8 @@ if (isset($_POST['submit_login'])) {
   $verify_login = query("SELECT * FROM members WHERE email='$email' AND password=SHA('$password')");
   if ($row = mysqli_fetch_assoc($verify_login)) {
     $_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
+    $_SESSION['id'] = $row['memberId'];
+    $_SESSION['email'] = $row['email'];
     header("Refresh:0");
   } else {
     echo "<h3><em>Invalid Login</em></h3>";
