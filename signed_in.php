@@ -106,17 +106,13 @@ echo "<h2>Logged in as $name.</h2>";
     }
 
     // find and display your friends
-    $friends = getTable("friends WHERE (friend2='" . $_SESSION['id'] . "' OR friend1='" . $_SESSION['id'] . "') AND accepted='1';");
+    $friends = getFriends($_SESSION['id']);
     foreach ($friends as $f) {
-      $member = getMemberById($f['friend1']);
-      if ($member['memberId'] == $_SESSION['id']) {
-        $member = getMemberById($f['friend2']);
-      }
       echo "<li>";
-      echo "You are friends with " . $member['firstName'] . ' ' . $member['lastName'];
+      echo "You are friends with " . $f['firstName'] . ' ' . $f['lastName'];
       echo "<form action='index.php' method='post'>";
       echo "<div>";
-      echo "<input type='hidden' value='" . $member['memberId'] . "' name='friend'>";
+      echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
       echo "<input type='submit' value='Remove' name='submit_friend_request_remove'>";
       echo "</div>";
       echo "</form>";
@@ -158,7 +154,7 @@ echo "<h2>Logged in as $name.</h2>";
     var modal = document.getElementByID('eventModal');
     var addBtn = document.getElementByID("add_event");
     var closeBtn = document.getElementByClassName("close");
-    
+
     addBtn.onclick = function(){
       modal.style.display = "block";
     }
@@ -173,4 +169,27 @@ echo "<h2>Logged in as $name.</h2>";
       }
     }
   </script>
+  <?php
+    if ($_POST['submit_add_event']) {
+      $event_name = $_POST['event_name'];
+      $start_date = $_POST['start_date'];
+      $end_date = $_POST['end_date'];
+      $start_time = $_POST['start_time'];
+      $end_time = $_POST['end_time'];
+      $start_year = $_POST['start_year'];
+      $end_year = $_POST['end_year'];
+      $invite_list = $_POST['invite_list'];
+
+
+
+
+      query("INSERT INTO events (owner, name, startDate, endDate, elapsedTime)
+             VALUES ('" . $_SESSION['id'] . "', '$event_name', '', '');
+        ");
+    }
+
+    if ($_POST['submit_edit_event']) {
+
+    }
+  ?>
 </div>

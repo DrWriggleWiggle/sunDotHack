@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<?php require_once("head.php");?>
 <head>
+  <?php require_once("head.php");?>
 </head>
 <body>
   <h1>Dr. Wriggle Wiggle</h1>

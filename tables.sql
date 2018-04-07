@@ -11,8 +11,8 @@ CREATE TABLE events (
 	eventId INTEGER NOT NULL AUTO_INCREMENT,
 	owner INTEGER NOT NULL,
 	name VARCHAR(255),
-	eventDate DATETIME,
-	elapsedTime INTEGER,
+	startDate DATETIME,
+	endDate DATETIME,
 	PRIMARY KEY (eventId),
 	FOREIGN KEY (owner) REFERENCES members(memberId)
 );
