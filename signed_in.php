@@ -132,4 +132,6 @@ echo "<h2>Logged in as $name.</h2>";
     <input type="submit" name="submit_friend_request" value="Request Friendship">
   </form>
   <!-- -->
+
+  <?php require_once("calendar.php"); ?>
 </div>
