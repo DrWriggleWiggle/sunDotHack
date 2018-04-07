@@ -12,12 +12,11 @@
     $date = array();
     foreach ($friends as $f) {
       $member = getMemberById($f['friend1']);
-      if ($member['memberId'] == $_SESSION['id']) {
+      if ($member['memberId'] == $id) {
         $member = getMemberById($f['friend2']);
       }
       array_push($data, $member);
     }
-    echo count($data);
     return $data;
   }
 
