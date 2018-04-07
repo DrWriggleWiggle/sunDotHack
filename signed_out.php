@@ -23,7 +23,7 @@
         <div class="card card-login mx-auto mt-5">
             <div class="card-header">Login</div>
             <div class="card-body">
-                <form action="index.php" method="post">
+                <form method="post">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
                         <input class="form-control" id="exampleInputEmail1" type="text" name="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -32,7 +32,7 @@
                         <label for="exampleInputPassword1">Password</label>
                         <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password" name="password">
                     </div>
-                    <input class="btn btn-primary btn-block" name="submit_login" value="Login" type="submit">
+					<input class="btn btn-primary btn-block" name="submit_login" value="Login" type="submit" />
                 </form>
                 <div class="text-center">
                     <a class="d-block small mt-3" href="register.php">Register an Account</a> <!-- Need to add link -->
@@ -55,8 +55,7 @@
 					$verify_login = query("SELECT * FROM members WHERE email='$email' AND password=SHA('$password')");
 					if ($row = mysqli_fetch_assoc($verify_login)) {
 						$_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
-						header("Refresh:0");
-						echo "<meta http-equiv=\"refresh\" content=\"0; signed_out.php\">";
+						echo "<meta http-equiv=\"refresh\" content=\"0; signed_in.php\">";
 					}
 					else {
 						echo "<script type=\"text/javascript\">
