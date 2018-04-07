@@ -24,7 +24,7 @@
 
         var dp = new DayPilot.Calendar("dp");
         dp.viewType = "Week";
-
+        /*
         dp.onEventMoved = function (args) {
             $.post("backend_move.php",
                     {
@@ -74,7 +74,7 @@
                     });
 
         };
-
+        */
         dp.onEventClick = function(args) {
             alert("clicked: " + args.e.id());
         };
