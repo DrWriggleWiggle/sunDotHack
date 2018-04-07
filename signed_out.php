@@ -8,6 +8,9 @@ if (isset($_POST['submit_login'])) { // if an attempt to log in has been made, v
     $_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
     $_SESSION['id'] = $row['memberId'];
     $_SESSION['email'] = $row['email'];
+    echo "<script type=\"text/javascript\">
+      alert(\"VALID Login\");
+      </script>";
     header("Refresh:0");
   }
   else {
