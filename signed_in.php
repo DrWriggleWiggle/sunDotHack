@@ -191,7 +191,7 @@ echo "<h2>Logged in as $name.</h2>";
     }
 
     window.onclick = function(event){
-      if(event.target == modal){
+      if(event.target == eModal){
         eModal.style.display = "none";
       }
     }
