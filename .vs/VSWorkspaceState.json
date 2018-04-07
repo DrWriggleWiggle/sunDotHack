@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\css",
+    "\\vendor",
+    "\\vendor\\bootstrap",
+    "\\vendor\\datatables",
+    "\\vendor\\font-awesome",
+    "\\vendor\\font-awesome\\css",
+    "\\vendor\\jquery"
+  ],
+  "SelectedNode": "\\vendor\\jquery\\jquery.min.js",
+  "PreviewInSolutionExplorer": false
+}

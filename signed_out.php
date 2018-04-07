@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <title>Login</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -32,10 +32,26 @@
             <label for="exampleInputPassword1">Password</label>
             <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password" name="password">
           </div>
-          <a class="btn btn-primary btn-block" href="index.html">Login</a>
+          <a class="btn btn-primary btn-block" name="submit_login" value="Login">Login</a>
+			<?php
+				require_once("sql.php");
+				if (isset($_POST['submit_login'])) { // if an attempt to log in has been made, verify. Refresh the page or throw an error message
+					$email = $_POST['email'];
+					$password = $_POST['password'];
+					$verify_login = query("SELECT * FROM members WHERE email='$email' AND password=SHA('$password')");
+				if ($row = mysqli_fetch_assoc($verify_login)) {
+					$_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
+					$_SESSION['id'] = $row['memberId'];
+					$_SESSION['email'] = $row['email'];
+					header("Refresh:0");
+				} 
+				else {
+					echo "<h3><em>Invalid Login</em></h3>";
+				}
+			?>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" type="submit" name="submit_login" value="Login">Register an Account</a>
+          <a class="d-block small mt-3" type="submit" name="submit_login" value="Login" href="register.php">Register an Account</a> <!-- Need to add link -->
         </div>
       </div>
     </div>
