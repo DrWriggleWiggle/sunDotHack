@@ -1,4 +1,32 @@
 <!-- Log in form -->
+<div class="container">
+    <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+            <form action="signed_out.php" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input class="form-control" id="exampleInputEmail1" type="text" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password" name="password">
+                </div>
+      <input class="btn btn-primary btn-block" name="submit_login" value="Login" type="submit" />
+            </form>
+            <div class="text-center">
+                <a class="d-block small mt-3" href="register.php">Register an Account</a> <!-- Need to add link -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- -->
+
 <!-- This will be the default page that appears if the user is not signed in -->
 <body id="page-top">
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
@@ -14,7 +42,7 @@
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="register.php" id="containerLandingPageText" style="color:white">Register</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="login.php" id="containerLandingPageText" style="color:white">Login</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="signout.php" id="containerLandingPageText" style="color:white">Login</a>
                     </li>
                 </ul>
             </div>
@@ -64,7 +92,9 @@
       $verify_login = query("SELECT * FROM members WHERE email='$email' AND password=SHA('$password')");
       if ($row = mysqli_fetch_assoc($verify_login)) {
         $_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
-        header("Location: http://167.99.168.175/index.php");
+        $_SESSION['id'] = $row['memberId'];
+        $_SESSION['email'] = $row['email'];
+        header("Refresh:0");
       }
       else {
         echo "<script type=\"text/javascript\">
