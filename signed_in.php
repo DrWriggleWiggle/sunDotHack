@@ -178,8 +178,8 @@ echo "<h2>Logged in as $name.</h2>";
   <button id="add_event">Add Event</button>
 
   <script>
-    var eModal = document.getElementByID("eventModal");
-    var addBtn = document.getElementByID("add_event");
+    var eModal = document.getElementById("eventModal");
+    var addBtn = document.getElementById("add_event");
     var closeBtn = document.getElementByClassName("close");
 
     addBtn.onclick = function(){
