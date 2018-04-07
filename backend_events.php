@@ -1,6 +1,6 @@
 <?php
 require_once '_db.php';
-    
+
 $stmt = $db->prepare('SELECT * FROM events WHERE NOT ((end <= :start) OR (start >= :end))');
 
 $stmt->bindParam(':start', $_POST['start']);

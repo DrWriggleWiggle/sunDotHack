@@ -17,6 +17,7 @@ echo "<h2>Logged in as $name.</h2>";
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: grba(0,0,0,0.4);
+  color: black;
 }
 
 .modal-content{
