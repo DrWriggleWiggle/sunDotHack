@@ -161,13 +161,13 @@ echo "<h2>Logged in as $name.</h2>";
       <span class="close">&times;</span>
       <h2>Event Editor</h2>
       <form>
-        Event Name: <input type="text" name="eventname"><br>
-        Starts at: <input type="date" name="startdate"> <input type="time" name="starttime"><br>
-        Ends at: <input type="date" name="enddate"> <input type="time" name="endtime"><br>
+        Event Name: <input type="text" name="event_name"><br>
+        Starts at: <input type="date" name="start_date"> <input type="time" name="start_time"><br>
+        Ends at: <input type="date" name="end_date"> <input type="time" name="end_time"><br>
         Location: <input type="text" name="location">
         <!-- Do a PHP query for friend list, use JS to dynamically change the invitations -->
         Invitations:<br>
-        <select name="invitations" size="1" multiple>
+        <select name="invite_list" size="1" multiple>
           <option value="1">Friend1</option>
         </select>
         <submit>
@@ -197,26 +197,40 @@ echo "<h2>Logged in as $name.</h2>";
     }
   </script>
   <?php
-    if ($_POST['submit_add_event']) {
-      $event_name = $_POST['event_name'];
-      $start_date = $_POST['start_date'];
-      $end_date = $_POST['end_date'];
-      $start_time = $_POST['start_time'];
-      $end_time = $_POST['end_time'];
-      $start_year = $_POST['start_year'];
-      $end_year = $_POST['end_year'];
-      $invite_list = $_POST['invite_list'];
+  function createEvent() {
+    $event_name = $_POST['event_name'];
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+    $start_time = $_POST['start_time'];
+    $end_time = $_POST['end_time'];
+    $location = $_POST['location'];
+    $invite_list = $_POST['invite_list'];
 
+    // create event
+    query("INSERT INTO events (owner, name, startDate, endDate, location)
+           VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date $start_time', '$end_date $end_time', '$location');
+      ");
 
+    $event = getLastRow("events");
 
-
-      query("INSERT INTO events (owner, name, startDate, endDate, elapsedTime)
-             VALUES ('" . $_SESSION['id'] . "', '$event_name', '', '');
-        ");
+    // invite people to event
+    foreach ($invite_list as $invitee) {
+      $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['event'] . "' AND accepted='" . $events['accepted'] . "'");
+      if (count($test) == 0) {
+        query(
+          "INSERT INTO actions (member, event, accepted)
+          VALUES ('$invitee', '" . $events['eventId'] . "', '0');"
+        );
+      }
     }
+  }
 
-    if ($_POST['submit_edit_event']) {
+  if ($_POST['submit_add_event']) {
+    createEvent();
+  }
 
-    }
+  if ($_POST['submit_edit_event']) {
+    createEvent();
+  }
   ?>
 </div>

@@ -13,6 +13,7 @@ CREATE TABLE events (
 	name VARCHAR(255),
 	startDate DATETIME,
 	endDate DATETIME,
+	location VARCHAR(255),
 	PRIMARY KEY (eventId),
 	FOREIGN KEY (owner) REFERENCES members(memberId)
 );
