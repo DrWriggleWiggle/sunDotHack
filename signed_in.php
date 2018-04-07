@@ -29,6 +29,28 @@ echo "<h2>Logged in as $name.</h2>";
 }
 </style>
 
+<script>
+  var eModal = document.getElementById("eventModal");
+  var addBtn = document.getElementById("add_event");
+  var closeBtn = document.getElementsByClassName("close");
+
+  addBtn.onclick = function(){
+    eModal.style.display = "block";
+  }
+
+  for (var i = 0; i < closeBtn.length; ++i) {
+    closeBtn[i].onclick = function(){
+      eModal.style.display = "none";
+    }
+  }
+
+  window.onclick = function(event){
+    if(event.target == eModal){
+      eModal.style.display = "none";
+    }
+  }
+</script>
+
 <!-- Logout form -->
 <form action="index.php" method="post">
   <div>
@@ -177,72 +199,14 @@ echo "<h2>Logged in as $name.</h2>";
         </select>
         <input type="submit" name="submit_add_event" value="Add Event">
       </form>
+    </div>
   </div>
-  </div>
-
   <button id="add_event">Add Event</button>
-
-  <script>
-    var eModal = document.getElementById("eventModal");
-    var addBtn = document.getElementById("add_event");
-    var closeBtn = document.getElementsByClassName("close");
-
-    addBtn.onclick = function(){
-      eModal.style.display = "block";
-    }
-
-    for (var i = 0; i < closeBtn.length; ++i) {
-      closeBtn[i].onclick = function(){
-        eModal.style.display = "none";
-      }
-    }
-
-    window.onclick = function(event){
-      if(event.target == eModal){
-        eModal.style.display = "none";
-      }
-    }
-  </script>
   <?php
-  function createEvent() {
-    $event_name = $_POST['event_name'];
-    $start_date = $_POST['start_date'];
-    $end_date = $_POST['end_date'];
-    $start_time = $_POST['start_time'];
-    $end_time = $_POST['end_time'];
-    $location = $_POST['location'];
-    $invite_list = $_POST['invite_list'];
-
-    $start_date_format = date("Y-m-d", strtotime($start_date));
-    $end_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
-
-    // create event
-    query("INSERT INTO events (owner, name, startDate, endDate, location)
-           VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date_format', '$end_date_format', '$location');
-      ");
-
-    // invite people to event
-    foreach ($invite_list as $invitee) {
-      $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['event'] . "' AND accepted='" . $events['accepted'] . "'");
-      if (count($test) == 0) {
-        query(
-          "INSERT INTO actions (member, event, accepted)
-          VALUES ('$invitee', '" . $events['eventId'] . "', '0');"
-        );
-      }
-    }
-  }
-
-  echo "<p id='test'>$start_date_format</p>";
-
-  if ($_POST['submit_add_event']) {
-    createEvent();
-  }
-
-  echo "Again, <p id='test'>$start_date_format</p>";
-
-  if ($_POST['submit_edit_event']) {
-    createEvent();
+  if (isset($_POST['submit_add_event'])) {
+    echo "<h1>It IS set</h1>";
+  } else {
+    echo "<h1>It is not set</h1>";
   }
   ?>
 </div>
