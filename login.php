@@ -4,11 +4,31 @@
   <?php require_once("head.php");?>
 <html lang="en">
 <body>
+  <?php
+  require_once("sql.php");
+  if (isset($_POST['submit_login'])) { // if an attempt to log in has been made, verify. Refresh the page or throw an error message
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $verify_login = query("SELECT * FROM members WHERE email='$email' AND password=SHA('$password')");
+    if ($row = mysqli_fetch_assoc($verify_login)) {
+      $_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
+      $_SESSION['id'] = $row['memberId'];
+      $_SESSION['email'] = $row['email'];
+      header("Location: http://167.99.168.175/index.php");
+      exit();
+    }
+    else {
+      echo "<script type=\"text/javascript\">
+        alert(\"Invalid Login\");
+        </script>";
+    }
+  }
+  ?>
   <div class="container">
       <div class="card card-login mx-auto mt-5">
           <div class="card-header">Login</div>
           <div class="card-body">
-              <form action="index.php" method="post">
+              <form action="login.php" method="post">
                   <div class="form-group">
                       <label for="exampleInputEmail1">Email</label>
                       <input class="form-control" id="exampleInputEmail1" type="text" name="email" aria-describedby="emailHelp" placeholder="Enter email">
