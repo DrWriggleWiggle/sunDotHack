@@ -17,6 +17,7 @@
       }
       array_push($data, $member);
     }
+    echo count($data);
     return $data;
   }
 
