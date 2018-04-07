@@ -167,7 +167,7 @@ echo "<h2>Logged in as $name.</h2>";
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2>Event Editor</h2>
-      <form>
+      <form action="index.php" method="post">
         Event Name: <input type="text" name="event_name"><br>
         Starts at: <input type="date" name="start_date"> <input type="time" name="start_time"><br>
         Ends at: <input type="date" name="end_date"> <input type="time" name="end_time"><br>
