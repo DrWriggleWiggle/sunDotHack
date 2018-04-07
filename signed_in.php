@@ -165,10 +165,15 @@ echo "<h2>Logged in as $name.</h2>";
         Event Name: <input type="text" name="event_name"><br>
         Starts at: <input type="date" name="start_date"> <input type="time" name="start_time"><br>
         Ends at: <input type="date" name="end_date"> <input type="time" name="end_time"><br>
-        Location: <input type="text" name="location">
-        <!-- Do a PHP query for friend list, use JS to dynamically change the invitations -->
+        Location: <input type="text" name="location"> <br>
         Invitations:<br>
         <select name="invite_list" size="1" multiple>
+          <?php
+          $friends = getFriends($_SESSION['id']);
+          foreach ($friends as $friend) {
+            echo "<option value='" . $friend['memberId'] . "'>" . $friend['firstName'] . ' ' . $friend['lastName'] . "</option>";
+          }
+          ?>
           <option value="1">Friend1</option>
         </select>
         <submit>
