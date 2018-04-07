@@ -101,7 +101,8 @@ echo "<h2>Logged in as $name.</h2>";
     <?php
     if (isset($_POST['submit_friend_request_remove'])) { // if you hit the remove button, remove the friendship row from the db
       query("DELETE FROM friends WHERE (friend1='" . $_POST['friend'] . "' AND friend2='" . $_SESSION['id'] . "') OR (friend2='" . $_POST['friend'] . "' AND friend1='" . $_SESSION['id'] . "')");
-      echo "<h5><em>Friendship with " . $_POST['friend'] . " has been removed.</em></h5>";
+      $friend = getMemberById($_POST['friend']);
+      echo "<h5><em>Friendship with " . $friend['firstName'] . " " . $friend['lastName'] . " has been removed.</em></h5>";
     }
 
     // find and display your friends
