@@ -210,6 +210,14 @@ echo "<h2>Logged in as $name.</h2>";
     }
   </script>
   <?php
-  echo "<h1>Test</h1>";
+
+  if ($_POST['submit_add_event']) {
+    echo "<p id='test'>$start_date_format</p>";
+    createEvent();
+  }
+
+  if ($_POST['submit_edit_event']) {
+    createEvent();
+  }
   ?>
 </div>
