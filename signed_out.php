@@ -1,3 +1,23 @@
+<?php
+require_once("sql.php");
+if (isset($_POST['submit_login'])) { // if an attempt to log in has been made, verify. Refresh the page or throw an error message
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $verify_login = query("SELECT * FROM members WHERE email='$email' AND password=SHA('$password')");
+  if ($row = mysqli_fetch_assoc($verify_login)) {
+    $_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
+    $_SESSION['id'] = $row['memberId'];
+    $_SESSION['email'] = $row['email'];
+    header("Refresh:0");
+  }
+  else {
+    echo "<script type=\"text/javascript\">
+      alert(\"Invalid Login\");
+      </script>";
+  }
+}
+?>
+
 <!-- Log in form -->
 <div class="container">
     <div class="card card-login mx-auto mt-5">
@@ -84,23 +104,4 @@
     <script src="js/contact_me.js"></script>
     <!-- Custom scripts for this template -->
     <script src="js/freelancer.min.js"></script>
-    <?php
-    require_once("sql.php");
-    if (isset($_POST['submit_login'])) { // if an attempt to log in has been made, verify. Refresh the page or throw an error message
-      $email = $_POST['email'];
-      $password = $_POST['password'];
-      $verify_login = query("SELECT * FROM members WHERE email='$email' AND password=SHA('$password')");
-      if ($row = mysqli_fetch_assoc($verify_login)) {
-        $_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
-        $_SESSION['id'] = $row['memberId'];
-        $_SESSION['email'] = $row['email'];
-        header("Refresh:0");
-      }
-      else {
-        echo "<script type=\"text/javascript\">
-          alert(\"Invalid Login\");
-          </script>";
-      }
-    }
-    ?>
 </body>
