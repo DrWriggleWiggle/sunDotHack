@@ -163,7 +163,7 @@ echo "<h2>Logged in as $name.</h2>";
       <h2>Event Editor</h2>
       <form>
         Event Name: <input type="text" name="event_name"><br>
-        Starts at: <input id="s" type="date" name="start_date"> <input type="time" name="start_time"><br>
+        Starts at: <input type="date" name="start_date"> <input type="time" name="start_time"><br>
         Ends at: <input type="date" name="end_date"> <input type="time" name="end_time"><br>
         Location: <input type="text" name="location"> <br>
         Invitations:<br>
@@ -194,7 +194,6 @@ echo "<h2>Logged in as $name.</h2>";
     for (var i = 0; i < closeBtn.length; ++i) {
       closeBtn[i].onclick = function(){
         eModal.style.display = "none";
-        alert(document.getElementById("s").value);
       }
     }
 
@@ -214,9 +213,12 @@ echo "<h2>Logged in as $name.</h2>";
     $location = $_POST['location'];
     $invite_list = $_POST['invite_list'];
 
+    $start_date_format = date("Y-m-d", strtotime($start_date));
+    $end_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
+
     // create event
     query("INSERT INTO events (owner, name, startDate, endDate, location)
-           VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date $start_time', '$end_date $end_time', '$location');
+           VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date_format', '$end_date_format', '$location');
       ");
 
     $event = getLastRow("events");
