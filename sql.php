@@ -7,8 +7,8 @@
     return $result;
   }
 
-  function getLastRow($table) {
-    $q = "SELECT * FROM $table ORDER BY id DESC LIMIT 1";
+  function getLastRow($table, $id_name) {
+    $q = "SELECT * FROM $table ORDER BY $id_name DESC LIMIT 1";
     $result = query($q);
     $row = mysqli_fetch_assoc($result);
     return $row;

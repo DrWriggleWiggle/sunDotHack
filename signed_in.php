@@ -221,8 +221,6 @@ echo "<h2>Logged in as $name.</h2>";
            VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date_format', '$end_date_format', '$location');
       ");
 
-    $event = getLastRow("events");
-
     // invite people to event
     foreach ($invite_list as $invitee) {
       $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['event'] . "' AND accepted='" . $events['accepted'] . "'");
@@ -235,11 +233,10 @@ echo "<h2>Logged in as $name.</h2>";
     }
   }
 
-  createEvent();
-
   if ($_POST['submit_add_event']) {
-    echo "<p id='test'>$start_date_format</p>";
     createEvent();
+  } else {
+    echo "<p id='test'>$start_date_format</p>";
   }
 
   if ($_POST['submit_edit_event']) {
