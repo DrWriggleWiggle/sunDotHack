@@ -167,9 +167,9 @@ echo "<h2>Logged in as $name.</h2>";
         Ends at: <input type="date" name="end_date"> <input type="time" name="end_time"><br>
         Location: <input type="text" name="location"> <br>
         Invitations:<br>
-        <select name="invite_list" size="1" multiple>
+        <?php $friends = getFriends($_SESSION['id']); ?>
+        <select name="invite_list" size=<?php echo count($friends); ?> multiple>
           <?php
-          $friends = getFriends($_SESSION['id']);
           foreach ($friends as $friend) {
             echo "<option value='" . $friend['memberId'] . "'>" . $friend['firstName'] . ' ' . $friend['lastName'] . "</option>";
           }
