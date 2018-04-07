@@ -1,9 +1,5 @@
 <!-- Log in form -->
 <!-- This will be the default page that appears if the user is not signed in -->
-<html>
-<head>
-    <?php require_once("head.php"); ?>
-</head>
 <body id="page-top">
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
         <div class="container">
@@ -60,5 +56,22 @@
     <script src="js/contact_me.js"></script>
     <!-- Custom scripts for this template -->
     <script src="js/freelancer.min.js"></script>
+    <?php
+    require_once("sql.php");
+    if (isset($_POST['submit_login'])) { // if an attempt to log in has been made, verify. Refresh the page or throw an error message
+      $email = $_POST['email'];
+      $password = $_POST['password'];
+      $verify_login = query("SELECT * FROM members WHERE email='$email' AND password=SHA('$password')");
+      if ($row = mysqli_fetch_assoc($verify_login)) {
+        $_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
+        header("Location: http://167.99.168.175/index.php");
+        exit();
+      }
+      else {
+        echo "<script type=\"text/javascript\">
+          alert(\"Invalid Login\");
+          </script>";
+      }
+    }
+    ?>
 </body>
-</html>
