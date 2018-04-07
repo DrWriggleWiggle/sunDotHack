@@ -12,7 +12,7 @@
     $date = array();
     foreach ($friends as $f) {
       $member = getMemberById($f['friend1']);
-      if ($member['memberId'] == $_SESSION['id']) {
+      if ($member['memberId'] == $id) {
         array_push($data, getMemberById($f['friend2']));
       }
     }
