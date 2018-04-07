@@ -15,34 +15,6 @@
     );
   }
 
-  function addFriendConnection($friend1, $friend2) {
-    query(
-      "INSERT INTO friends (friend1, friend2, accepted)
-      VALUES ('$friend1', '$friend2', '0');
-      "
-    );
-  }
-
-  function getFriendRequests($id) {
-    $q = "SELECT * FROM friends WHERE friend2='$id' AND accepted='0';";
-    $result = query($q);
-    $data = array();
-    while ($row = mysqli_fetch_assoc($result)) {
-      array_push($data, $row);
-    }
-    return $data;
-  }
-
-  function getFriends($id) {
-    $q = "SELECT * FROM friends WHERE (friend1='$id' OR friend2='$id') AND accepted='1';";
-    $result = query($q);
-    $data = array();
-    while ($row = mysqli_fetch_assoc($result)) {
-      array_push($data, $row);
-    }
-    return $data;
-  }
-
   function getTable($table) {
     $q = "SELECT * FROM $table";
     $result = query($q);

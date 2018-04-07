@@ -8,7 +8,6 @@
 </form>
 <?php
 require_once("sql.php");
-
 if (isset($_POST['submit_login'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];
