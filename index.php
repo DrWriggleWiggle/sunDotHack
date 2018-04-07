@@ -6,7 +6,6 @@
 <?php
 session_start();
 
-<?php
 require_once("sql.php");
 if (isset($_POST['submit_login'])) { // if an attempt to log in has been made, verify. Refresh the page or throw an error message
   $email = $_POST['email'];
@@ -25,7 +24,6 @@ if (isset($_POST['submit_login'])) { // if an attempt to log in has been made, v
       </script>";
   }
 }
-?>
 
 if (isset($_SESSION['user'])) { // if the user is logged in
   if (isset($_POST['submit_logout'])) { // if the user logs out, destroy the session and refresh the page
