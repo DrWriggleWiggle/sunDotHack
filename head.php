@@ -4,7 +4,6 @@
 <meta author="DrWriggleWiggle">
 <link rel="stylesheet" href="style.css">
 <!-- demo stylesheet -->
-<link type="text/css" rel="stylesheet" href="media/layout.css" />
 <link type="text/css" rel="stylesheet" href="themes/calendar_g.css" />
 <link type="text/css" rel="stylesheet" href="themes/calendar_green.css" />
 <link type="text/css" rel="stylesheet" href="themes/calendar_traditional.css" />
