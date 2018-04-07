@@ -233,11 +233,13 @@ echo "<h2>Logged in as $name.</h2>";
     }
   }
 
+  echo "<p id='test'>$start_date_format</p>";
+
   if ($_POST['submit_add_event']) {
     createEvent();
-  } else {
-    echo "<p id='test'>$start_date_format</p>";
   }
+
+  echo "Again, <p id='test'>$start_date_format</p>";
 
   if ($_POST['submit_edit_event']) {
     createEvent();
