@@ -7,18 +7,6 @@
         <div id="nav"></div>
     </div>
     <div style="margin-left: 160px;">
-
-        <div class="space">
-            Theme: <select id="theme">
-                <option value="calendar_default">Default</option>
-                <option value="calendar_white">White</option>
-                <option value="calendar_g">Google-Like</option>
-                <option value="calendar_green">Green</option>
-                <option value="calendar_traditional">Traditional</option>
-                <option value="calendar_transparent">Transparent</option>
-            </select>
-        </div>
-
         <div id="dp"></div>
     </div>
 
