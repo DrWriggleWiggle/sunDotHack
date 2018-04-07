@@ -190,7 +190,7 @@ echo "<h2>Logged in as $name.</h2>";
       eModal.style.display = "none";
     }
 
-    window.onclilck = function(event){
+    window.onclick = function(event){
       if(event.target == modal){
         eModal.style.display = "none";
       }
