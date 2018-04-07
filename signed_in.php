@@ -233,6 +233,7 @@ echo "<h2>Logged in as $name.</h2>";
   }
 
   if ($_POST['submit_add_event']) {
+    echo "<h1>test</h1>";
     createEvent();
   }
 
