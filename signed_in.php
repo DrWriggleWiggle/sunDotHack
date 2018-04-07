@@ -174,7 +174,6 @@ echo "<h2>Logged in as $name.</h2>";
             echo "<option value='" . $friend['memberId'] . "'>" . $friend['firstName'] . ' ' . $friend['lastName'] . "</option>";
           }
           ?>
-          <option value="1">Friend1</option>
         </select>
         <input type="submit" name="submit_add_event" value="Add Event">
       </form>
