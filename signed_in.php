@@ -134,4 +134,21 @@ echo "<h2>Logged in as $name.</h2>";
   <!-- -->
 
   <?php require_once("calendar.php"); ?>
+
+  <!-- Modal for event creation/edit -->
+  <div id="eventModal" class="modal">
+    <span class="close">&times;</span>
+    <h2>Event Editor</h2>
+    <form>
+      Event Name: <input type="text" name="eventname"><br>
+      Starts at: <input type="date" name="startdate"> <input type="time" name="starttime"><br>
+      Ends at: <input type="date" name="enddate"> <input type="time" name="endtime"><br>
+      Location: <input type="text" name="location">
+      <!-- Do a PHP query for friend list, use JS to dynamically change the invitations -->
+      Invitations:<br>
+      <select name="invitations" size="1" multiple>
+        <option value="1">Friend1</option>
+      </select>
+    </form>
+  </div>
 </div>

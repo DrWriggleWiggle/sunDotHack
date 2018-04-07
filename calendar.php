@@ -2,12 +2,10 @@
 <div class="hideSkipLink">
 </div>
 <div class="main">
-
     <div style="float:left; width: 160px;">
         <div id="nav"></div>
     </div>
     <div style="margin-left: 160px;">
-
         <div id="dp"></div>
     </div>
 
@@ -78,6 +76,7 @@
         };
         */
         dp.onEventClick = function(args) {
+            //TODO create a dialog box to edit event
             alert("clicked: " + args.e.id());
         };
 
