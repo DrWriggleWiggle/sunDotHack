@@ -56,6 +56,7 @@
 					if ($row = mysqli_fetch_assoc($verify_login)) {
 						$_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
 						header("Refresh:0");
+						echo "<meta http-equiv=\"refresh\" content=\"0; signed_out.php\">";
 					}
 					else {
 						echo "<script type=\"text/javascript\">
