@@ -27,6 +27,12 @@ echo "<h2>Logged in as $name.</h2>";
   border: 1px solid #888;
   width: 80%;
 }
+
+#test {
+  color: red;
+  font-size: xx-large;
+  display: block;
+}
 </style>
 
 <!-- Logout form -->
@@ -236,7 +242,7 @@ echo "<h2>Logged in as $name.</h2>";
   }
 
   if ($_POST['submit_add_event']) {
-    echo "<h1>$start_date_format</h1>";
+    echo "<p id='test'>$start_date_format</p>";
     createEvent();
   }
 
