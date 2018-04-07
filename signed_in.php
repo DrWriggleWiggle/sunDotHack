@@ -137,16 +137,23 @@ echo "<h2>Logged in as $name.</h2>";
       $end_date = $_POST['end_date'];
       $start_time = $_POST['start_time'];
       $end_time = $_POST['end_time'];
-      $start_year = $_POST['start_year'];
-      $end_year = $_POST['end_year'];
+      $loation = $_POST['location'];
       $invite_list = $_POST['invite_list'];
 
-
-
-
-      query("INSERT INTO events (owner, name, startDate, endDate, elapsedTime)
-             VALUES ('" . $_SESSION['id'] . "', '$event_name', '', '');
+      // create event
+      query("INSERT INTO events (owner, name, startDate, endDate, location)
+             VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date $start_time', '$end_date $end_time', '$location');
         ");
+
+      $event = getLastRow("events");
+
+      // invite people to event
+      foreach ($invite_list as $invitee) {
+        query(
+          "INSERT INTO actions (member, event, accepted)
+          VALUES ('$invitee', '" . $events['eventId'] . "', '0');"
+        );
+      }
     }
 
     if ($_POST['submit_edit_event']) {
