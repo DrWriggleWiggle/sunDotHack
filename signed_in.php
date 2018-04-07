@@ -171,7 +171,7 @@ echo "<h2>Logged in as $name.</h2>";
         <select name="invite_list" size="1" multiple>
           <option value="1">Friend1</option>
         </select>
-        <submit>
+        <input type="submit" value="Add Event">
       </form>
   </div>
   </div>
