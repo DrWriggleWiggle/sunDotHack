@@ -170,6 +170,7 @@ echo "<h2>Logged in as $name.</h2>";
         <select name="invitations" size="1" multiple>
           <option value="1">Friend1</option>
         </select>
+        <submit>
       </form>
   </div>
   </div>
@@ -177,21 +178,21 @@ echo "<h2>Logged in as $name.</h2>";
   <button id="add_event">Add Event</button>
 
   <script>
-    var modal = document.getElementByID('eventModal');
+    var eModal = document.getElementByID("eventModal");
     var addBtn = document.getElementByID("add_event");
     var closeBtn = document.getElementByClassName("close");
 
     addBtn.onclick = function(){
-      modal.style.display = "block";
+      eModal.style.display = "block";
     }
 
     closeBtn.onclick = function(){
-      modal.style.display = "none";
+      eModal.style.display = "none";
     }
 
     window.onclilck = function(event){
       if(event.target == modal){
-        modal.style.display = "none";
+        eModal.style.display = "none";
       }
     }
   </script>
