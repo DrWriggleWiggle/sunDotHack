@@ -7,6 +7,26 @@
     return $result;
   }
 
+  function getLastRow($table, $id_name) {
+    $q = "SELECT * FROM $table ORDER BY $id_name DESC LIMIT 1";
+    $result = query($q);
+    $row = mysqli_fetch_assoc($result);
+    return $row;
+  }
+
+  function getFriends($id) {
+    $friends = getTable("friends WHERE (friend2='" . $id . "' OR friend1='" . $id . "') AND accepted='1';");
+    $data = array();
+    foreach ($friends as $f) {
+      $member = getMemberById($f['friend1']);
+      if ($member['memberId'] == $id) {
+        $member = getMemberById($f['friend2']);
+      }
+      array_push($data, $member);
+    }
+    return $data;
+  }
+
   function getTable($table) {
     $q = "SELECT * FROM $table";
     $result = query($q);
