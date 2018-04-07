@@ -180,7 +180,7 @@ echo "<h2>Logged in as $name.</h2>";
   <script>
     var eModal = document.getElementById("eventModal");
     var addBtn = document.getElementById("add_event");
-    var closeBtn = document.getElementByClassName("close");
+    var closeBtn = document.getElementsByClassName("close");
 
     addBtn.onclick = function(){
       eModal.style.display = "block";
