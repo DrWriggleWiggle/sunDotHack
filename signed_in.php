@@ -4,6 +4,30 @@ $name = $_SESSION['user'];
 echo "<h2>Logged in as $name.</h2>";
 ?>
 
+<!-- Style sheet for modal form -->
+<style>
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: grba(0,0,0,0.4);
+}
+
+.modal-content{
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+</style>
+
 <!-- Logout form -->
 <form action="index.php" method="post">
   <div>
@@ -130,6 +154,47 @@ echo "<h2>Logged in as $name.</h2>";
   <!-- -->
 
   <?php require_once("calendar.php"); ?>
+
+  <!-- Modal for event creation/edit -->
+  <div id="eventModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Event Editor</h2>
+      <form>
+        Event Name: <input type="text" name="eventname"><br>
+        Starts at: <input type="date" name="startdate"> <input type="time" name="starttime"><br>
+        Ends at: <input type="date" name="enddate"> <input type="time" name="endtime"><br>
+        Location: <input type="text" name="location">
+        <!-- Do a PHP query for friend list, use JS to dynamically change the invitations -->
+        Invitations:<br>
+        <select name="invitations" size="1" multiple>
+          <option value="1">Friend1</option>
+        </select>
+      </form>
+  </div>
+  </div>
+
+  <button id="add_event">Add Event</button>
+
+  <script>
+    var modal = document.getElementByID('eventModal');
+    var addBtn = document.getElementByID("add_event");
+    var closeBtn = document.getElementByClassName("close");
+
+    addBtn.onclick = function(){
+      modal.style.display = "block";
+    }
+
+    closeBtn.onclick = function(){
+      modal.style.display = "none";
+    }
+
+    window.onclilck = function(event){
+      if(event.target == modal){
+        modal.style.display = "none";
+      }
+    }
+  </script>
   <?php
     if ($_POST['submit_add_event']) {
       $event_name = $_POST['event_name'];
