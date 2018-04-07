@@ -7,6 +7,18 @@
     return $result;
   }
 
+  function getFriends($id) {
+    $friends = getTable("friends WHERE (friend2='" . $id . "' OR friend1='" . $id . "') AND accepted='1';");
+    $date = array();
+    foreach ($friends as $f) {
+      $member = getMemberById($f['friend1']);
+      if ($member['memberId'] == $_SESSION['id']) {
+        array_push($data, getMemberById($f['friend2']));
+      }
+    }
+    return $data;
+  }
+
   function getTable($table) {
     $q = "SELECT * FROM $table";
     $result = query($q);
