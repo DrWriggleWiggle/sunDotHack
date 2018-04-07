@@ -2,11 +2,6 @@
 <html>
 <?php require_once("head.php");?>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
   <title>Social Calendar</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +13,6 @@
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Dr. Wriggle Wiggle</h1>
   <?php
   session_start();
   if (isset($_SESSION['user'])) { // if the user is logged in
