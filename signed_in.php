@@ -187,7 +187,7 @@ echo "<h2>Logged in as $name.</h2>";
       eModal.style.display = "block";
     }
 
-    closeBtn.onclick = function(){
+    closeBtn[0].onclick = function(){
       eModal.style.display = "none";
     }
 
