@@ -12,6 +12,9 @@ if (isset($_SESSION['user'])) { // if the user is logged in
   }
   require_once("signed_in.php");
 } else {
+  echo "<script type=\"text/javascript\">
+    alert(\"false\");
+    </script>";
   require_once("signed_out.php");
 }
 ?>
