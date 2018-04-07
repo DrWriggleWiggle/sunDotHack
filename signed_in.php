@@ -28,29 +28,6 @@ echo "<h2>Logged in as $name.</h2>";
   width: 80%;
 }
 </style>
-
-<script>
-  var eModal = document.getElementById("eventModal");
-  var addBtn = document.getElementById("add_event");
-  var closeBtn = document.getElementsByClassName("close");
-
-  addBtn.onclick = function(){
-    eModal.style.display = "block";
-  }
-
-  for (var i = 0; i < closeBtn.length; ++i) {
-    closeBtn[i].onclick = function(){
-      eModal.style.display = "none";
-    }
-  }
-
-  window.onclick = function(event){
-    if(event.target == eModal){
-      eModal.style.display = "none";
-    }
-  }
-</script>
-
 <!-- Logout form -->
 <form action="index.php" method="post">
   <div>
@@ -202,6 +179,27 @@ echo "<h2>Logged in as $name.</h2>";
     </div>
   </div>
   <button id="add_event">Add Event</button>
+  <script>
+    var eModal = document.getElementById("eventModal");
+    var addBtn = document.getElementById("add_event");
+    var closeBtn = document.getElementsByClassName("close");
+
+    addBtn.onclick = function(){
+      eModal.style.display = "block";
+    }
+
+    for (var i = 0; i < closeBtn.length; ++i) {
+      closeBtn[i].onclick = function(){
+        eModal.style.display = "none";
+      }
+    }
+
+    window.onclick = function(event){
+      if(event.target == eModal){
+        eModal.style.display = "none";
+      }
+    }
+  </script>
   <?php
   if (isset($_POST['submit_add_event'])) {
     echo "<h1>It IS set</h1>";
