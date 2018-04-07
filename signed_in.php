@@ -163,7 +163,7 @@ echo "<h2>Logged in as $name.</h2>";
       <h2>Event Editor</h2>
       <form>
         Event Name: <input type="text" name="event_name"><br>
-        Starts at: <input type="date" name="start_date"> <input type="time" name="start_time"><br>
+        Starts at: <input id="s" type="date" name="start_date"> <input type="time" name="start_time"><br>
         Ends at: <input type="date" name="end_date"> <input type="time" name="end_time"><br>
         Location: <input type="text" name="location"> <br>
         Invitations:<br>
@@ -194,6 +194,7 @@ echo "<h2>Logged in as $name.</h2>";
     for (var i = 0; i < closeBtn.length; ++i) {
       closeBtn[i].onclick = function(){
         eModal.style.display = "none";
+        alert(document.getElementById("s").value);
       }
     }
 
