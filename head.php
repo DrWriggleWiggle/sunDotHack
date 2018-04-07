@@ -13,3 +13,9 @@
 <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <!-- daypilot libraries -->
 <script src="js/daypilot/daypilot-all.min.js" type="text/javascript"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
