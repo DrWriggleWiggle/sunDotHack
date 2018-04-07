@@ -231,7 +231,7 @@ echo "<h2>Logged in as $name.</h2>";
   }
 
   if (isset($_POST['submit_add_event'])) {
-    echo "<h1>It IS set</h1>";
+    createEvent();
   }
   ?>
 </div>
