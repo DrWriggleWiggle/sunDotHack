@@ -3,7 +3,7 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Login</div>
         <div class="card-body">
-            <form action="signed_out.php" method="post">
+            <form action="index.php" method="post">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
                     <input class="form-control" id="exampleInputEmail1" type="text" name="email" aria-describedby="emailHelp" placeholder="Enter email">
