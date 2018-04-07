@@ -1,3 +1,4 @@
+<!-- Log in form -->
 <h2>Sign In</h2>
 <form action="index.php" method="post">
   <div>
@@ -6,9 +7,11 @@
     <input type="submit" name="submit_login" value="Login">
   </div>
 </form>
+<!-- -->
+
 <?php
 require_once("sql.php");
-if (isset($_POST['submit_login'])) {
+if (isset($_POST['submit_login'])) { // if an attempt to log in has been made, verify. Refresh the page or throw an error message
   $email = $_POST['email'];
   $password = $_POST['password'];
   $verify_login = query("SELECT * FROM members WHERE email='$email' AND password=SHA('$password')");
@@ -20,7 +23,7 @@ if (isset($_POST['submit_login'])) {
   } else {
     echo "<h3><em>Invalid Login</em></h3>";
   }
-} else if (isset($_POST['submit_register'])) {
+} else if (isset($_POST['submit_register'])) { // if a registration has been submitted, create account adn refresh
   $first_name = $_POST["firstName"];
   $last_name = $_POST["lastName"];
   $email = $_POST["email"];
@@ -33,6 +36,8 @@ if (isset($_POST['submit_login'])) {
   header("Refresh:0");
 }
 ?>
+
+<!-- Registration Form -->
 <h2>...Or Create an Account!</h2>
 <form action="index.php" method="post">
   <div>
@@ -43,3 +48,4 @@ if (isset($_POST['submit_login'])) {
     <input type="submit" name="submit_register" value="Create Account">
   </div>
 </form>
+<!-- -->

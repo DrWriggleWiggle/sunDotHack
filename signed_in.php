@@ -1,33 +1,40 @@
 <?php
+// reminds the user who is logged in
 $name = $_SESSION['user'];
 echo "<h2>Logged in as $name.</h2>";
 ?>
+
+<!-- Logout form -->
 <form action="index.php" method="post">
   <div>
     <input type="submit" name="submit_logout" value="Logout">
   </div>
 </form>
+<!-- -->
+
 <div>
   <h3>Friends</h3>
   <h4>Requests</h4>
   <?php
   require_once("sql.php");
-  if (isset($_POST['submit_friend_request'])) {
+  if (isset($_POST['submit_friend_request'])) { // if the user just submitted a friend request
     $friend1 = $_SESSION['id'];
     $friend2 = -1;
-    $result = getTable("members WHERE email='" . $_POST['email'] . "'");
+    $result = getTable("members WHERE email='" . $_POST['email'] . "'"); // look for account with requested e-mail
     if (count($result) == 0) {
       echo "<h5><em>Cannot find user with email " . $_POST['email'] . "</em></h5>";
     } else {
       $member = $result[0];
       $friend2 = $member['memberId'];
-      if ($member['memberId'] == $_SESSION['id']) {
+      if ($member['memberId'] == $_SESSION['id']) { // if requested e-mail is from signed-in account, throw an error message
         echo "<h5><em>Cannot send a friend request to yourself</em></h5>";
       } else {
+        // if a friendship or request is already present in the database, throw an error message
         $test = getTable("friends WHERE (friend1='" . $_SESSION['id'] . "' AND friend2='$friend2') OR (friend2='" . $_SESSION['id'] . "' AND friend1='$friend2');");
         if (count($test) > 0) {
           echo "<h5><em>Friendship already going on.</em></h5>";
         } else {
+          // adds request to database
           query(
             "INSERT INTO friends (friend1, friend2, accepted)
             VALUES ('$friend1', '$friend2', '0');"
@@ -38,13 +45,13 @@ echo "<h2>Logged in as $name.</h2>";
     }
   }
 
-  if (isset($_POST['submit_friend_request_accept'])) {
+  if (isset($_POST['submit_friend_request_accept'])) { // if a friend request is ACCEPTED, set accepted to 1
     query(
       "UPDATE friends SET accepted='1'
       WHERE friend1='" . $_POST['friend1'] . "' AND friend2='" . $_SESSION['id'] . "';
       "
     );
-  } else if (isset($_POST['submit_friend_request_reject'])) {
+  } else if (isset($_POST['submit_friend_request_reject'])) { // if a friend request is REJECTED, remove the row in the db
     query(
       "DELETE FROM friends
       WHERE friend1='" . $_POST['friend1'] . "' AND friend2='" . $_SESSION['id'] . "';
@@ -52,6 +59,7 @@ echo "<h2>Logged in as $name.</h2>";
     );
   }
 
+  // find and display friend requests sent to you
   $friendRequests = getTable("friends WHERE friend2='" . $_SESSION['id'] . "' AND accepted='0';");
   foreach ($friendRequests as $fr) {
     $member = getMemberById($fr['friend1']);
@@ -72,11 +80,12 @@ echo "<h2>Logged in as $name.</h2>";
   <h4>Friends</h4>
   <ul>
     <?php
-    if (isset($_POST['submit_friend_request_remove'])) {
+    if (isset($_POST['submit_friend_request_remove'])) { // if you hit the remove button, remove the friendship row from the db
       query("DELETE FROM friends WHERE (friend1='" . $_POST['friend'] . "' AND friend2='" . $_SESSION['id'] . "') OR (friend2='" . $_POST['friend'] . "' AND friend1='" . $_SESSION['id'] . "')");
       echo "<h5><em>Friendship with " . $_POST['friend'] . " has been removed.</em></h5>";
     }
 
+    // find and display your friends
     $friends = getTable("friends WHERE (friend2='" . $_SESSION['id'] . "' OR friend1='" . $_SESSION['id'] . "') AND accepted='1';");
     foreach ($friends as $f) {
       $member = getMemberById($f['friend1']);
@@ -95,9 +104,12 @@ echo "<h2>Logged in as $name.</h2>";
     }
     ?>
   </ul>
+
+  <!-- Friendship Request Form -->
   <h4>Send Friend Request</h4>
   <form action="index.php" method="post">
     <label>E-mail</label> <input type="text" name="email"> <br>
     <input type="submit" name="submit_friend_request" value="Request Friendship">
   </form>
+  <!-- -->
 </div>
