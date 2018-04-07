@@ -6,6 +6,14 @@
     return $result;
   }
 
+  function createAccount($first_name, $last_name, $email, $password) {
+    query(
+      "INSERT INTO members (firstName, lastName, email, password)
+      VALUES ('$first_name', '$last_name', '$email', SHA('$password'));
+      "
+    );
+  }
+
   function getLastRow($table) {
     $q = "SELECT * FROM $table ORDER BY id DESC LIMIT 1";
     $result = query($q);
