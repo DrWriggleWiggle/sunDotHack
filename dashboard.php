@@ -46,7 +46,7 @@
           <?php
           // reminds the user who is logged in
           $name = $_SESSION['user'];
-          echo "<h2>Logged in as $name.</h2>";
+          echo "<h2 class='login_h2'><span class='login_banner'>Logged in as $name.</span></h2>";
           ?>
         </li>
         <li class="nav-item">
