@@ -149,7 +149,7 @@ echo "<h2>Logged in as $name.</h2>";
       echo "<div>";
       echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
       echo "<input type='submit' value='Remove' name='submit_friend_request_remove'>";
-      //echo "<input type='submit' value='View Schedule' name='submit_view_schedule'>";
+      echo "<input type='submit' value='View Schedule' name='submit_view_schedule'>";
       echo "</div>";
       echo "</form>";
       echo "</li>";
