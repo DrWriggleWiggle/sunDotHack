@@ -187,7 +187,7 @@ echo "<h2>Logged in as $name.</h2>";
     $location = $_POST['location'];
     $invite_list = $_POST['invite_list'];
 
-    $start_date_format = date("Y-m-d", strtotime($start_date));
+    $start_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
     $end_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
 
     // create event
