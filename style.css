@@ -10,10 +10,6 @@ body {
   font-size: large;
 }
 
-.login {
-  margin: 0px 30px;
-}
-
 .modal{
   display: none;
   position: fixed;
