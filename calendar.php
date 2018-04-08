@@ -85,42 +85,7 @@
 
         function loadEvents() {
           dp.events.list = [
-            <?php
-              function event_json_encode($event) {
-                $start = $event['startDate'];
-                $start = str_replace(" ", "T", $start);
-                $end = $event['endDate'];
-                $end = str_replace(" ", "T", $end);
-                $id = $event['eventId'];
-                $text = $event['name'] . '|location: ' . $event['location'];
-
-                $code = "{";
-                $code .= "start: \"$start\", ";
-                $code .= "end: \"$end\", ";
-                $code .= "id: \"$id\", ";
-                $code .= "text: \"$text\"";
-                $code .= "}";
-                return $code;
-              }
-
-              function action_json_encode($action) {
-                $event = getEventById($action['event']);
-                event_json_encode($event);
-              }
-
-              require_once("sql.php");
-              $owned_events = getTable("events WHERE owner='" . $_SESSION['id'] . "'");
-              $json_event_list = array();
-              foreach ($owned_events as $event) {
-                array_push($json_event_list, event_json_encode($event));
-              }
-              $invited_events = getTable("actions WHERE member='" $_SESSION['id'] . "' AND accepted='1'");
-              foreach ($invited_events as $action) {
-                array_push($json_event_list, action_json_encode($action));
-              }
-
-              echo implode(",", $json_event_list);
-            ?>
+            
           ];
             /*var start = dp.visibleStart();
             var end = dp.visibleEnd();
