@@ -124,7 +124,7 @@
               $friendSubmissions = getTable("friends WHERE friend1='" . $_SESSION['id'] . "' AND accepted='0';");
               foreach ($friendSubmissions as $fs) {
                 $member = getMemberById($fs['friend2']);
-                echo "<tr colspan='5'><td>";
+                echo "<tr><td colspan='5'>";
                 echo "Waiting on friend request sent to " . $member['firstName'] . ' ' . $member['lastName'];
                 echo "<form action='index.php' method='post'>";
                 echo "<div>";
