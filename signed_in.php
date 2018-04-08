@@ -275,6 +275,12 @@ echo "<h2>Logged in as $name.</h2>";
     }
   }
 
+  function deleteEvent(){
+    $event_id = $_POST['eventId'];
+    //TODO fix this SQL query
+    query("DELETE FROM events WHERE eventID = '" . $event_id . "';");
+  }
+
   if (isset($_POST['submit_add_event'])) {
     createEvent();
     usleep(500000);

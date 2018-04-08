@@ -192,12 +192,12 @@
         document.getElementById("eid").value = args.e.id();
 
         //TODO parse the fields correctly
-        document.getElementById("event_name").value = args.e.text();
-        document.getElementById("start_date").value = args.e.start();
-        document.getElementById("start_time").value = args.e.start();
-        document.getElementById("end_date").value = args.e.end();
-        document.getElementById("end_time").value = args.e.end();
-        document.getElementById("location").value = args.e.text();
+        document.getElementById("event_name").value = args.e.text().split("|")[0];
+        document.getElementById("start_date").value = args.e.start().split("T")[0];
+        document.getElementById("start_time").value = args.e.start().split("T")[1];
+        document.getElementById("end_date").value = args.e.end().split("T")[0];
+        document.getElementById("end_time").value = args.e.end().split("T")[1];
+        document.getElementById("location").value = args.e.text().split("|")[1];
         //alert("clicked: " + args.e.id());
       };
 
