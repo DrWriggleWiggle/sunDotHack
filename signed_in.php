@@ -1,16 +1,3 @@
-<?php
-// reminds the user who is logged in
-$name = $_SESSION['user'];
-echo "<h2>Logged in as $name.</h2>";
-?>
-
-<!-- Logout form -->
-<form action="index.php" method="post">
-  <div>
-    <input type="submit" name="submit_logout" value="Logout">
-  </div>
-</form>
-
 <!-- Invites list -->
 <div>
   <div>

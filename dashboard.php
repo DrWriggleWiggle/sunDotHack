@@ -234,8 +234,12 @@
           ?>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+          <!-- Logout form -->
+          <form action="index.php" method="post">
+            <div>
+              <input type="submit" name="submit_logout" value="Logout">
+            </div>
+          </form>
         </li>
       </ul>
     </div>
