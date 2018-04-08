@@ -86,7 +86,26 @@
         function loadEvents() {
           dp.events.list = [
             <?php
-              
+            function event_json_encode($event) {
+              $start = $event['startDate'];
+              $start = str_replace(" ", "T", $start);
+              $end = $event['endDate'];
+              $end = str_replace(" ", "T", $end);
+              $id = $event['eventId'];
+              $text = $event['name'] . '|location: ' . $event['location'];
+
+              $code = "{";
+              $code .= "start: \"$start\", ";
+              $code .= "end: \"$end\", ";
+              $code .= "id: \"$id\", ";
+              $code .= "text: \"$text\"";
+              $code .= "}";
+              return $code;
+            }
+
+          
+
+            echo implode(",", $json_event_list);
             ?>
           ];
             /*var start = dp.visibleStart();
