@@ -76,7 +76,7 @@
         };
         */
         dp.onEventClick = function(args) {
-            alert("clicked: " + args.e.id());
+            alert("" + args.e.text());
         };
 
         dp.init();
@@ -160,7 +160,7 @@
     <script type="text/javascript">
     $(document).ready(function() {
         $("#theme").change(function(e) {
-            dp.theme = this.value;
+            dp.theme = this.text;
             dp.update();
         });
     });
