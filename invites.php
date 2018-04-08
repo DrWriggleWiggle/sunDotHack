@@ -114,9 +114,13 @@
                       <?php
                       require_once("sql.php");
                       if (isset($_POST['submit_invite_accept'])){ //if invite is accepted, set accepted to 1
-                      //$invitations is an array of pending events associated with the current user
+                        query("UPDATE actions SET accepted=1 WHERE event='" . $_POST['event'] . "' AND member='" . $_SESSION['id'] . "';");
+                      }
+                      else if(isset($_POST['submit_invite_decline'])){ //if invite is declined, set accepted to 2
+                        query("UPDATE actions SET accepted=2 WHERE event='" . $_POST['event'] . "' AND member='" . $_SESSION['id'] . "';");
+                      }
+
                       $invitations = getInvites($_SESSION['id']);
-                      echo "<h1> Count = " . count($invitations) . "</h1>";
                       foreach ($invitations as $i) {
                         echo "<tr>";
                         echo "<th>Invitation to " . $i['name'] . "</th>";
@@ -127,7 +131,6 @@
                         echo "</form>";
                         echo "</tr>";
                       }
-                    }
                        ?>
                       </tbody>
                     </table>
@@ -181,36 +184,4 @@
   </div>
 </body>
 
-
-<div>
-  <h3>Invitations</h3>
-  <ul>
-  <?php
-
-  require_once("sql.php");
-  if (isset($_POST['submit_invite_accept'])){ //if invite is accepted, set accepted to 1
-    query("UPDATE actions SET accepted=1 WHERE event='" . $_POST['event'] . "' AND member='" . $_SESSION['id'] . "';");
-  }
-  else if(isset($_POST['submit_invite_decline'])){ //if invite is declined, set accepted to 2
-    query("UPDATE actions SET accepted=2 WHERE event='" . $_POST['event'] . "' AND member='" . $_SESSION['id'] . "';");
-  }
-
-  //$invitations is an array of pending events associated with the current user
-  $invitations = getInvites($_SESSION['id']);
-  foreach ($invitations as $i) {
-    echo "<li>";
-    echo "Invitation to " . $i['name'];
-    echo "<form action='index.php' method='post'>";
-    echo "<div>";
-    echo "<input type='hidden' value='" . $i['eventId'] . "' name='event'>";
-    echo "<input type='submit' value='Accept' name='submit_invite_accept'>";
-    echo "<input type='submit' value='Decline' name='submit_invite_decline'>";
-    echo "</div>";
-    echo "</form>";
-    echo "</li>";
-  }
-   ?>
- </ul>
-</div>
-</body>
 </html>
