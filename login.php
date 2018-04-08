@@ -14,8 +14,8 @@
       $_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
       $_SESSION['id'] = $row['memberId'];
       $_SESSION['email'] = $row['email'];
-      header("Location: index.php");
-      exit;
+      header("Location: http://167.99.168.175/index.php");
+      exit();
     }
     else {
       echo "<script type=\"text/javascript\">

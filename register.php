@@ -71,7 +71,7 @@
 				"INSERT INTO members (firstName, lastName, email, password)
 				VALUES ('$first_name', '$last_name', '$email', SHA('$password'));
 				");
-				echo "<meta http-equiv=\"refresh\" content=\"0; signed_out.php\">";
+				echo "<meta http-equiv=\"refresh\" content=\"0; index.php\">";
 			}
 ?>
 </html>
