@@ -31,7 +31,7 @@ if (isset($_SESSION['user'])) { // if the user is logged in
     session_destroy();
     header("Refresh:0");
   }
-  require_once("signed_in.php");
+  require_once("dashboard.php");
 } else {
   require_once("signed_out.php");
 }
