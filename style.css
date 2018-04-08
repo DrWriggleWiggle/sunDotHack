@@ -10,13 +10,8 @@ body {
   font-size: large;
 }
 
-.login_h2 {
+.login {
   margin: 0px 10px;
-}
-
-.login_banner {
-  color: white;
-  font-style: oblique;
 }
 
 .modal{
