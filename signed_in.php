@@ -150,7 +150,7 @@ echo "<h2>Logged in as $name.</h2>";
       echo "<form action='friend_calendar.php' method='post' target='_blank'><div>";
       echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
       echo "<input type='submit' value='View Schedule' name='submit_view_schedule'>";
-      echo "</div></form>"
+      echo "</div></form>";
       echo "</li>";
     }
     ?>
