@@ -255,7 +255,6 @@
                     echo "<td>" . $f['lastName'] . "</td>";
                     echo "<td>" . $f['email'] . "</td>";
                     echo "<td>Friend Calendar Link</td>";
-                    echo "</li>";
                     echo "</tr>";
                   }
                   ?>
