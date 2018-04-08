@@ -116,7 +116,6 @@
                       <?php
                       require_once("sql.php");
                       if (isset($_POST['submit_invite_accept'])){ //if invite is accepted, set accepted to 1
-        @ -117,18 +104,19 @@
                       //$invitations is an array of pending events associated with the current user
                       $invitations = getInvites($_SESSION['id']);
                       foreach ($invitations as $i) {
