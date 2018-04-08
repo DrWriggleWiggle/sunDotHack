@@ -139,12 +139,7 @@
                 //console.log(data);
                 dp.events.list = data;
                 dp.update();
-<<<<<<< HEAD
             });*/
-=======
-            });
-            */
->>>>>>> 692e63bce5dbe106c905737edc27ab76476fb2b0
         }
 
     </script>
