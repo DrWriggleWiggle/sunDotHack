@@ -23,7 +23,7 @@
     <header class="masthead bg-primary text-white text-center">
         <div class="container" style="padding-top:2em">
             <img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="">
-            <h1 class="text-uppercase mb-0">Social Calendar Company</h1>
+            <h1 class="text-uppercase mb-0">Wriggle Social Calendar Application</h1>
             <hr class="star-light">
             <h2 class="font-weight-light mb-0">A new way to connect</h2>
         </div>
@@ -32,6 +32,8 @@
     <section class="bg-primary text-white mb-0" id="about">
         <div class="container">
             <h2 class="text-center text-uppercase text-white">Say Hello to Your Friends.</h2>
+            <hr class="star-light mb-5">
+            <img src="img/clock.png" style="display:block; margin-left:auto; margin-right:auto; height:12em">
             <hr class="star-light mb-5">
             <div class="row">
                 <div class="col-lg-4 ml-auto">
