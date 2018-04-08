@@ -211,6 +211,7 @@ echo "<h2>Logged in as $name.</h2>";
 
   if (isset($_POST['submit_add_event'])) {
     createEvent();
+    usleep(500000);
     echo "<meta http-equiv=\"refresh\" content=\"0; index.php\">";
   }
   ?>
