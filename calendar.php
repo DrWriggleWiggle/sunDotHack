@@ -103,7 +103,18 @@
               return $code;
             }
 
-          
+            
+
+            require_once("sql.php");
+            $owned_events = getTable("events WHERE owner='" . $_SESSION['id'] . "'");
+            $json_event_list = array();
+            foreach ($owned_events as $event) {
+              array_push($json_event_list, event_json_encode($event));
+            }
+            $invited_events = getTable("actions WHERE member='" $_SESSION['id'] . "' AND accepted='1'");
+            foreach ($invited_events as $action) {
+              array_push($json_event_list, action_json_encode($action));
+            }
 
             echo implode(",", $json_event_list);
             ?>
