@@ -136,10 +136,6 @@ echo "<h2>Logged in as $name.</h2>";
       echo "<h5><em>Friendship with " . $friend['firstName'] . " " . $friend['lastName'] . " has been removed.</em></h5>";
     }
 
-    if (isset($_POST['submit_view_schedule'])) {
-      echo "<meta http-equiv=\"refresh\" content=\"0; friend_calendar.php\">";
-    }
-
     // find and display your friends
     $friends = getFriends($_SESSION['id']);
     foreach ($friends as $f) {
@@ -149,9 +145,12 @@ echo "<h2>Logged in as $name.</h2>";
       echo "<div>";
       echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
       echo "<input type='submit' value='Remove' name='submit_friend_request_remove'>";
-      echo "<input type='submit' value='View Schedule' name='submit_view_schedule' target='_blank'>";
       echo "</div>";
       echo "</form>";
+      echo "<form action='friend_calendar.php' method='post' target='_blank'><div>";
+      echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
+      echo "<input type='submit' value='View Schedule' name='submit_view_schedule'>";
+      echo "</div></form>"
       echo "</li>";
     }
     ?>
