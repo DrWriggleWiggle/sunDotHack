@@ -219,7 +219,7 @@ echo "<h2>Logged in as $name.</h2>";
     $invite_list = $_POST['invite_list'];
 
     $start_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
-    $end_date_format = date("Y-m-d H:i:s", strtotime($end_date . ' ' . $start_time));
+    $end_date_format = date("Y-m-d H:i:s", strtotime($end_date . ' ' . $end_time));
 
     // create event
     query("INSERT INTO events (owner, name, startDate, endDate, location)
