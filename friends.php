@@ -120,11 +120,12 @@
                 echo "<h5><em>Friendship request to " . $no_friend['firstName'] . " " . $no_friend['lastName'] . " has been cancelled.</em></h5>";
               }
 
+              echo "<table>";
               // find and display friend requests you have sent
               $friendSubmissions = getTable("friends WHERE friend1='" . $_SESSION['id'] . "' AND accepted='0';");
               foreach ($friendSubmissions as $fs) {
                 $member = getMemberById($fs['friend2']);
-                echo "<li>";
+                echo "<tr>";
                 echo "Waiting on friend request sent to " . $member['firstName'] . ' ' . $member['lastName'];
                 echo "<form action='index.php' method='post'>";
                 echo "<div>";
@@ -132,8 +133,9 @@
                 echo "<input type='submit' value='Cancel' name='submit_friend_request_cancel'>";
                 echo "</div>";
                 echo "</form>";
-                echo "</li>";
+                echo "</tr>";
               }
+              echo "</table>";
 
                 $friends = getFriends($_SESSION['id']);
                 foreach ($friends as $f) {
