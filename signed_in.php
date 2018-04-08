@@ -17,7 +17,7 @@ echo "<h2>Logged in as $name.</h2>";
     <h3>Invitations</h3>
     <ul>
     <?php
-    require_once("sql.php");
+    /*require_once("sql.php");
     if (isset($_POST['submit_invite_accept'])){
       query("UPDATE actions SET accepted=1 WHERE event='" . $_POST['event'] . "' AND member='" . $_SESSION['id'] . "';")
     }
@@ -36,7 +36,7 @@ echo "<h2>Logged in as $name.</h2>";
       echo "</div>";
       echo "</form>";
       echo "</li>";
-    }
+    }*/
      ?>
    </ul>
   </div>
