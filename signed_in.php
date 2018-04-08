@@ -136,9 +136,9 @@ echo "<h2>Logged in as $name.</h2>";
       echo "<h5><em>Friendship with " . $friend['firstName'] . " " . $friend['lastName'] . " has been removed.</em></h5>";
     }
 
-    //if (isset($_POST['submit_view_schedule']) {
+    if (isset($_POST['submit_view_schedule']) {
       //require("schedule_view.php");
-    //}
+    }
 
     // find and display your friends
     $friends = getFriends($_SESSION['id']);
