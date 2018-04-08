@@ -76,7 +76,6 @@
         };
         */
         dp.onEventClick = function(args) {
-            //TODO create a dialog box to edit event
             alert("clicked: " + args.e.id());
         };
 
@@ -85,7 +84,14 @@
         loadEvents();
 
         function loadEvents() {
-            var start = dp.visibleStart();
+          dp.events.list = [
+            <?php
+              require_once("sql.php");
+              $owned_events = getTable("events WHERE owner='" . $_SESSION['id'] . "'");
+              echo json_encode($owned_events);
+            ?>
+          ];
+            /*var start = dp.visibleStart();
             var end = dp.visibleEnd();
 
             $.post("backend_events.php",
@@ -97,7 +103,7 @@
                 //console.log(data);
                 dp.events.list = data;
                 dp.update();
-            });
+            });*/
         }
 
     </script>
