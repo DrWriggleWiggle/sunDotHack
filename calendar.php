@@ -105,6 +105,7 @@
 
               function action_json_encode($action) {
                 $event = getTable("events WHERE eventId='" . $action['event'] . "'");
+                print_r($event);
                 event_json_encode($event);
               }
 
@@ -117,7 +118,6 @@
 
               $invited_events = getTable("actions WHERE member='" . $_SESSION['id'] . "' AND accepted='1'");
               foreach ($invited_events as $action) {
-                echo "<h1>here</h1>";
                 array_push($json_event_list, action_json_encode($action));
               }
 
