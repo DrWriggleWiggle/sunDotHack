@@ -185,7 +185,8 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <?php require_once("calendar.php"); ?>
+          <!-- Calendar -->
+          <?php require("calendar.php"); ?>
 
           <!-- Modal for event creation/edit -->
           <div id="eventModal" class="modal">
@@ -199,7 +200,7 @@
                 Location: <input type="text" name="location"> <br>
                 Invitations:<br>
                 <?php $friends = getFriends($_SESSION['id']); ?>
-                <select name="invite_list" size=<?php $num = count($friends); if ($num > 10) {$num = 10;} echo $num; ?> multiple>
+                <select name="invite_list[]" size=<?php $num = count($friends); if ($num > 10) {$num = 10;} echo $num; ?> multiple>
                   <?php
                   foreach ($friends as $friend) {
                     echo "<option value='" . $friend['memberId'] . "'>" . $friend['firstName'] . ' ' . $friend['lastName'] . "</option>";
@@ -242,17 +243,19 @@
             $location = $_POST['location'];
             $invite_list = $_POST['invite_list'];
 
-            $start_date_format = date("Y-m-d", strtotime($start_date));
-            $end_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
+            $start_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
+            $end_date_format = date("Y-m-d H:i:s", strtotime($end_date . ' ' . $end_time));
 
             // create event
             query("INSERT INTO events (owner, name, startDate, endDate, location)
                    VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date_format', '$end_date_format', '$location');
               ");
 
+            $events = getLastRow("events", "eventId");
+
             // invite people to event
             foreach ($invite_list as $invitee) {
-              $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['event'] . "' AND accepted='" . $events['accepted'] . "'");
+              $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['eventId'] . "' AND accepted='" . $events['accepted'] . "'");
               if (count($test) == 0) {
                 query(
                   "INSERT INTO actions (member, event, accepted)
@@ -264,6 +267,8 @@
 
           if (isset($_POST['submit_add_event'])) {
             createEvent();
+            usleep(500000);
+            echo "<meta http-equiv=\"refresh\" content=\"0; index.php\">";
           }
           ?>
         </div>
