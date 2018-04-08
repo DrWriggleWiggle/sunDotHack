@@ -93,7 +93,7 @@
             //Test
             dp.events.list = [
               {
-                start: "2018-04-08:T09:00:00",
+                start: "2018-04-08T09:00:00",
                 end: "2018-04-08T11:00:00",
                 id: "1",
                 text: "Dr. Wriggle Wiggle's wiggle party"
