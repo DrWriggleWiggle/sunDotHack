@@ -120,6 +120,7 @@
               }
 
               echo implode(",", $json_event_list);
+              dp.update();
             ?>
           ];
             /*var start = dp.visibleStart();
