@@ -10,9 +10,40 @@ echo "<h2>Logged in as $name.</h2>";
     <input type="submit" name="submit_logout" value="Logout">
   </div>
 </form>
-<!-- -->
 
+<!-- Invites list -->
 <div>
+  <div>
+    <h3>Invitations</h3>
+    <ul>
+    <?php
+
+    require_once("sql.php");
+    if (isset($_POST['submit_invite_accept'])){ //if invite is accepted, set accepted to 1
+      query("UPDATE actions SET accepted=1 WHERE event='" . $_POST['event'] . "' AND member='" . $_SESSION['id'] . "';");
+    }
+    else if(isset($_POST['submit_invite_decline'])){ //if invite is declined, set accepted to 2
+      query("UPDATE actions SET accepted=2 WHERE event='" . $_POST['event'] . "' AND member='" . $_SESSION['id'] . "';");
+    }
+
+    //$invitations is an array of pending events associated with the current user
+    $invitations = getInvites($_SESSION['id']);
+    foreach ($invitations as $i) {
+      echo "<li>";
+      echo "Invitation to " . $i['name'];
+      echo "<form action='index.php' method='post'>";
+      echo "<div>";
+      echo "<input type='hidden' value='" . $i['eventId'] . "' name='event'>";
+      echo "<input type='submit' value='Accept' name='submit_invite_accept'>";
+      echo "<input type='submit' value='Decline' name='submit_invite_decline'>";
+      echo "</div>";
+      echo "</form>";
+      echo "</li>";
+    }
+     ?>
+   </ul>
+  </div>
+
   <h3>Friends</h3>
   <h4>Requests</h4>
   <?php
@@ -187,8 +218,8 @@ echo "<h2>Logged in as $name.</h2>";
     $location = $_POST['location'];
     $invite_list = $_POST['invite_list'];
 
-    $start_date_format = date("Y-m-d", strtotime($start_date));
-    $end_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
+    $start_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
+    $end_date_format = date("Y-m-d H:i:s", strtotime($end_date . ' ' . $end_time));
 
     // create event
     query("INSERT INTO events (owner, name, startDate, endDate, location)
