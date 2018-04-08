@@ -221,6 +221,9 @@ echo "<h2>Logged in as $name.</h2>";
     // invite people to event
     foreach ($invite_list as $invitee) {
       $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['event'] . "' AND accepted='" . $events['accepted'] . "'");
+      echo "<script type=\"text/javascript\">
+        alert(\"" . count($test) . \");
+        </script>";
       if (count($test) == 0) {
         query(
           "INSERT INTO actions (member, event, accepted)
