@@ -27,7 +27,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Wriggle Social Calendar</a>
+    <a class="navbar-brand" href="index.php">Wriggle Social Calendar</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -90,22 +90,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Description</th>
-                  <th>Accept</th>
-                  <th>Decline</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>Description</th>
-                  <th>Accept</th>
-                  <th>Decline</th>
-                </tr>
-              </tfoot>
+          <div>
+            <h3>Invitations</h3>
+            <ul>
               <?php
               require_once("sql.php");
               if (isset($_POST['submit_invite_accept'])){ //if invite is accepted, set accepted to 1
@@ -117,18 +104,19 @@
               //$invitations is an array of pending events associated with the current user
               $invitations = getInvites($_SESSION['id']);
               foreach ($invitations as $i) {
-                echo "<tr>";
-                echo "<th>Invitation to " . $i['name'] . "</th>";
+                echo "<li>";
+                echo "Invitation to " . $i['name'];
                 echo "<form action='invites.php' method='post'>";
+                echo "<div>";
                 echo "<input type='hidden' value='" . $i['eventId'] . "' name='event'>";
-                echo "<th><input type='submit' value='Accept' name='submit_invite_accept'></th>";
-                echo "<th><input type='submit' value='Decline' name='submit_invite_decline'></th>";
+                echo "<input type='submit' value='Accept' name='submit_invite_accept'>";
+                echo "<input type='submit' value='Decline' name='submit_invite_decline'>";
+                echo "</div>";
                 echo "</form>";
-                echo "</tr>";
+                echo "</li>";
               }
                ?>
-              </tbody>
-            </table>
+           </ul>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Wriggle Social Calendar</a>
+    <a class="navbar-brand" href="index.php">Wriggle Social Calendar</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -71,8 +71,8 @@
           <div id="eventModal" class="modal">
             <div class="modal-content">
               <span class="close">&times;</span>
-              <h2 style="padding-left:10em">Event Editor</h2>
-              <form action="index.php" method="post" style="padding-left:20em">
+              <h2>Event Editor</h2>
+              <form action="index.php" method="post">
                 Event Name: <input type="text" name="event_name"><br>
                 Starts at: <input type="date" name="start_date"> <input type="time" name="start_time"><br>
                 Ends at: <input type="date" name="end_date"> <input type="time" name="end_time"><br>
