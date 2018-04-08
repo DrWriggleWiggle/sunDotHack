@@ -222,6 +222,7 @@ echo "<h2>Logged in as $name.</h2>";
     foreach ($invite_list as $invitee) {
       $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['event'] . "' AND accepted='" . $events['accepted'] . "'");
       if (count($test) == 0) {
+        echo "<h1>" . count($test) . "</h1>";
         query(
           "INSERT INTO actions (member, event, accepted)
           VALUES ('$invitee', '" . $events['eventId'] . "', '0');"
