@@ -185,7 +185,7 @@
                   echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
                   echo "<input type='submit' value='View Schedule' name='submit_view_schedule'></div></form>";
                   echo "</td>";
-                  echo "<td>"
+                  echo "<td>";
                   echo "<form action='index.php' method='post'><div>";
                   echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
                   echo "<input type='submit' value='Remove' name='submit_friend_request_remove'></div></form>";
