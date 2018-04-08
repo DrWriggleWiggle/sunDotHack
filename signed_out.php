@@ -46,9 +46,7 @@
         </div>
     </section>
     <footer class="sticky-footer">
-      <div class="container">
           <a href="begin.html"<small>Copyright © Wriggle Social Calendar Corp 2018</small></a>
-      </div>
     </footer>
 
     <!-- Bootstrap core JavaScript -->
