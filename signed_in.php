@@ -1,8 +1,3 @@
-
-
-
-
-
 <!-- Invites list -->
 <div>
   <h3>Friends</h3>
