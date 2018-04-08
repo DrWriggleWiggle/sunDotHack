@@ -49,7 +49,7 @@
           <input class="btn btn-primary btn-block" name="submit_register" type="submit" value="Create Account">
         </form>
 	  	<div class="text-center">
-	  		<a class="d-block small mt-3" href="signed_out.php">Login</a>
+	  		<a class="d-block small mt-3" href="login.php">Login</a>
 	  	</div>
       </div>
     </div>

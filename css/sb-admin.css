@@ -68,7 +68,7 @@ body.fixed-nav {
 #mainNav .navbar-collapse {
   overflow: auto;
   max-height: 75vh;
-  padding-bottom: 30vh;
+  padding-bottom: 0vh;
 }
 
 #mainNav .navbar-collapse .navbar-nav .nav-item .nav-link {
