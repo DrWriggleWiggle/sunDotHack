@@ -85,7 +85,9 @@
 
         function loadEvents() {
           dp.events.list = [
-            
+            <?php
+              
+            ?>
           ];
             /*var start = dp.visibleStart();
             var end = dp.visibleEnd();
