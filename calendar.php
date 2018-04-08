@@ -116,7 +116,6 @@
               }
 
               $invited_events = getTable("actions WHERE member='" . $_SESSION['id'] . "' AND accepted='1'");
-              echo count($invited_events);
               foreach ($invited_events as $action) {
                 array_push($json_event_list, action_json_encode($action));
               }
