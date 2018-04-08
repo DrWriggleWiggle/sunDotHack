@@ -144,7 +144,7 @@ echo "<h2>Logged in as $name.</h2>";
         Location: <input type="text" name="location"> <br>
         Invitations:<br>
         <?php $friends = getFriends($_SESSION['id']); ?>
-        <select name="invite_list" size=<?php $num = count($friends); if ($num > 10) {$num = 10;} echo $num; ?> multiple>
+        <select name="invite_list[]" size=<?php $num = count($friends); if ($num > 10) {$num = 10;} echo $num; ?> multiple>
           <?php
           foreach ($friends as $friend) {
             echo "<option value='" . $friend['memberId'] . "'>" . $friend['firstName'] . ' ' . $friend['lastName'] . "</option>";
@@ -195,9 +195,11 @@ echo "<h2>Logged in as $name.</h2>";
            VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date_format', '$end_date_format', '$location');
       ");
 
+    $events = getLastRow("events", "eventId");
+
     // invite people to event
     foreach ($invite_list as $invitee) {
-      $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['event'] . "' AND accepted='" . $events['accepted'] . "'");
+      $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['eventId'] . "' AND accepted='" . $events['accepted'] . "'");
       if (count($test) == 0) {
         query(
           "INSERT INTO actions (member, event, accepted)

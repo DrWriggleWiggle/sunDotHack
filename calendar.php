@@ -76,7 +76,6 @@
         };
         */
         dp.onEventClick = function(args) {
-            //TODO create a dialog box to edit event
             alert("clicked: " + args.e.id());
         };
 
@@ -87,6 +86,15 @@
         function loadEvents() {
             //var start = dp.visibleStart();
             //var end = dp.visibleEnd();
+          dp.events.list = [
+            <?php
+              require_once("sql.php");
+              $owned_events = getTable("events WHERE owner='" . $_SESSION['id'] . "'");
+              echo json_encode($owned_events);
+            ?>
+          ];
+            /*var start = dp.visibleStart();
+            var end = dp.visibleEnd();
 
             //TODO replace with our own PHP code to grab event list
 
