@@ -94,34 +94,53 @@
   <div class="content-wrapper">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
-          <div>
-            <h3>Invitations</h3>
-            <ul>
-              <?php
-              require_once("sql.php");
-              if (isset($_POST['submit_invite_accept'])){ //if invite is accepted, set accepted to 1
-                query("UPDATE actions SET accepted=1 WHERE event='" . $_POST['event'] . "' AND member='" . $_SESSION['id'] . "';");
-              }
-              else if(isset($_POST['submit_invite_decline'])){ //if invite is declined, set accepted to 2
-                query("UPDATE actions SET accepted=2 WHERE event='" . $_POST['event'] . "' AND member='" . $_SESSION['id'] . "';");
-              }
-              //$invitations is an array of pending events associated with the current user
-              $invitations = getInvites($_SESSION['id']);
-              foreach ($invitations as $i) {
-                echo "<li>";
-                echo "Invitation to " . $i['name'];
-                echo "<form action='invites.php' method='post'>";
-                echo "<div>";
-                echo "<input type='hidden' value='" . $i['eventId'] . "' name='event'>";
-                echo "<input type='submit' value='Accept' name='submit_invite_accept'>";
-                echo "<input type='submit' value='Decline' name='submit_invite_decline'>";
-                echo "</div>";
-                echo "</form>";
-                echo "</li>";
-              }
-               ?>
-           </ul>
+        <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th>Description</th>
+                          <th>Accept</th>
+                          <th>Decline</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <th>Description</th>
+                          <th>Accept</th>
+                          <th>Decline</th>
+                        </tr>
+                      </tfoot>
+                  <div>
+                    <h3>Invitations</h3>
+                    <ul>
+                      <?php
+                      require_once("sql.php");
+                      if (isset($_POST['submit_invite_accept'])){ //if invite is accepted, set accepted to 1
+        @ -117,18 +104,19 @@
+                      //$invitations is an array of pending events associated with the current user
+                      $invitations = getInvites($_SESSION['id']);
+                      foreach ($invitations as $i) {
+                        echo "<tr>";
+                        echo "<th>Invitation to " . $i['name'] . "</th>";
+                        echo "<li>";
+                        echo "Invitation to " . $i['name'];
+                        echo "<form action='invites.php' method='post'>";
+                        echo "<div>";
+                        echo "<input type='hidden' value='" . $i['eventId'] . "' name='event'>";
+                        echo "<th><input type='submit' value='Accept' name='submit_invite_accept'></th>";
+                        echo "<th><input type='submit' value='Decline' name='submit_invite_decline'></th>";
+                        echo "<input type='submit' value='Accept' name='submit_invite_accept'>";
+                        echo "<input type='submit' value='Decline' name='submit_invite_decline'>";
+                        echo "</div>";
+                        echo "</form>";
+                        echo "</tr>";
+                        echo "</li>";
+                      }
+                       ?>
+                      </tbody>
+                    </table>
+                   </ul>
+                  </div>
           </div>
         </div>
       </div>
