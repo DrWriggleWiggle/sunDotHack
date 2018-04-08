@@ -17,29 +17,6 @@
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-  <style>
-  .modal{
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: grba(0,0,0,0.4);
-    color: black;
-  }
-
-  .modal-content{
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
-  </style>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -54,7 +31,7 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="dashboard.php">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">My Calendar</span>
+            <span class="dashboard.php">My Calendar</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
@@ -247,90 +224,46 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <?php require_once("calendar.php"); ?>
-
-          <!-- Modal for event creation/edit -->
-          <div id="eventModal" class="modal">
-            <div class="modal-content">
-              <span class="close">&times;</span>
-              <h2>Event Editor</h2>
-              <form action="index.php" method="post">
-                Event Name: <input type="text" name="event_name"><br>
-                Starts at: <input type="date" name="start_date"> <input type="time" name="start_time"><br>
-                Ends at: <input type="date" name="end_date"> <input type="time" name="end_time"><br>
-                Location: <input type="text" name="location"> <br>
-                Invitations:<br>
-                <?php $friends = getFriends($_SESSION['id']); ?>
-                <select name="invite_list" size=<?php $num = count($friends); if ($num > 10) {$num = 10;} echo $num; ?> multiple>
-                  <?php
-                  foreach ($friends as $friend) {
-                    echo "<option value='" . $friend['memberId'] . "'>" . $friend['firstName'] . ' ' . $friend['lastName'] . "</option>";
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Data Table Example</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Calendar</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Calendar</th>
+                </tr>
+                <?php
+                  require_once("sql.php");
+                  $friends = getFriends($_SESSION['id']);
+                  foreach ($friends as $f) {
+                    echo "<tr>";
+                    echo "<td>" . $f['firstName'] . "</td>";
+                    echo "<td>" . $f['lastName'] . "</td>";
+                    echo "<td>" . $f['email'] . "</td>";
+                    echo "<td>Friend Calendar Link</td>";
+                    echo "</li>";
+                    echo "</tr>";
                   }
                   ?>
-                </select>
-                <input type="submit" name="submit_add_event" value="Add Event">
-              </form>
-            </div>
+              </tbody>
+            </table>
           </div>
-          <button id="add_event">Add Event</button>
-          <script>
-            var eModal = document.getElementById("eventModal");
-            var addBtn = document.getElementById("add_event");
-            var closeBtn = document.getElementsByClassName("close");
-
-            addBtn.onclick = function(){
-              eModal.style.display = "block";
-            }
-
-            for (var i = 0; i < closeBtn.length; ++i) {
-              closeBtn[i].onclick = function(){
-                eModal.style.display = "none";
-              }
-            }
-
-            window.onclick = function(event){
-              if(event.target == eModal){
-                eModal.style.display = "none";
-              }
-            }
-          </script>
-          <?php
-          function createEvent() {
-            $event_name = $_POST['event_name'];
-            $start_date = $_POST['start_date'];
-            $end_date = $_POST['end_date'];
-            $start_time = $_POST['start_time'];
-            $end_time = $_POST['end_time'];
-            $location = $_POST['location'];
-            $invite_list = $_POST['invite_list'];
-
-            $start_date_format = date("Y-m-d", strtotime($start_date));
-            $end_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
-
-            // create event
-            query("INSERT INTO events (owner, name, startDate, endDate, location)
-                   VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date_format', '$end_date_format', '$location');
-              ");
-
-            // invite people to event
-            foreach ($invite_list as $invitee) {
-              $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['event'] . "' AND accepted='" . $events['accepted'] . "'");
-              if (count($test) == 0) {
-                query(
-                  "INSERT INTO actions (member, event, accepted)
-                  VALUES ('$invitee', '" . $events['eventId'] . "', '0');"
-                );
-              }
-            }
-          }
-
-          if (isset($_POST['submit_add_event'])) {
-            createEvent();
-          }
-          ?>
         </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
     </div>
     <!-- /.container-fluid-->
