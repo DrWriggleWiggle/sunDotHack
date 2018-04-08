@@ -176,5 +176,8 @@
 </div>
 <div class="clear">
 </div>
+<div>
+  <a href='index.php'>Return</a>
+</div>
 </body>
 </html>
