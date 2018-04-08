@@ -147,6 +147,10 @@ echo "<h2>Logged in as $name.</h2>";
       echo "<input type='submit' value='Remove' name='submit_friend_request_remove'>";
       echo "</div>";
       echo "</form>";
+      echo "<form action='friend_calendar.php' method='post' target='_blank'><div>";
+      echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
+      echo "<input type='submit' value='View Schedule' name='submit_view_schedule'>";
+      echo "</div></form>";
       echo "</li>";
     }
     ?>
@@ -161,7 +165,7 @@ echo "<h2>Logged in as $name.</h2>";
   <!-- -->
 
   <!-- Calendar -->
-  <?php require_once("calendar.php"); ?>
+  <?php require("calendar.php"); ?>
 
   <!-- Modal for event creation/edit -->
   <div id="eventModal" class="modal">

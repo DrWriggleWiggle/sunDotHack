@@ -22,7 +22,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Wriggle Social Calendar</a>
+    <a class="navbar-brand" href="dashboard.html">Wriggle Social Calendar</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -34,95 +34,19 @@
             <span class="dashboard.php">My Calendar</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="friends.php">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Friends</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Tables</span>
-          </a>
-        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Components</span>
+            <span class="nav-link-text">Friends</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="navbar.html">Navbar</a>
+              <a href="friends.php">My Friends</a>
             </li>
             <li>
-              <a href="cards.html">Cards</a>
+              <a href="addfriends.php">Add Friend</a>
             </li>
           </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Example Pages</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-            <li>
-              <a href="login.html">Login Page</a>
-            </li>
-            <li>
-              <a href="register.html">Registration Page</a>
-            </li>
-            <li>
-              <a href="forgot-password.html">Forgot Password Page</a>
-            </li>
-            <li>
-              <a href="blank.html">Blank Page</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-sitemap"></i>
-            <span class="nav-link-text">Menu Levels</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseMulti">
-            <li>
-              <a href="#">Second Level Item</a>
-            </li>
-            <li>
-              <a href="#">Second Level Item</a>
-            </li>
-            <li>
-              <a href="#">Second Level Item</a>
-            </li>
-            <li>
-              <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>
-              <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                <li>
-                  <a href="#">Third Level Item</a>
-                </li>
-                <li>
-                  <a href="#">Third Level Item</a>
-                </li>
-                <li>
-                  <a href="#">Third Level Item</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-          <a class="nav-link" href="#">
-            <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">Link</span>
-          </a>
-        </li>
-      </ul>
-      <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item">
-          <a class="nav-link text-center" id="sidenavToggler">
-            <i class="fa fa-fw fa-angle-left"></i>
-          </a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
@@ -227,7 +151,7 @@
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Table Example</div>
+          <i class="fa fa-table"></i> Pending Friend Requests</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -235,34 +159,87 @@
                 <tr>
                   <th>First Name</th>
                   <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Calendar</th>
+                  <th>Accept</th>
+                  <th>Ignore</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
                   <th>First Name</th>
                   <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Calendar</th>
+                  <th>Accept</th>
+                  <th>Ignore</th>
                 </tr>
                 <?php
-                  require_once("sql.php");
-                  $friends = getFriends($_SESSION['id']);
-                  foreach ($friends as $f) {
-                    echo "<tr>";
-                    echo "<td>" . $f['firstName'] . "</td>";
-                    echo "<td>" . $f['lastName'] . "</td>";
-                    echo "<td>" . $f['email'] . "</td>";
-                    echo "<td>Friend Calendar Link</td>";
-                    echo "</tr>";
+                require_once("sql.php");
+                $friendRequests = getTable("friends WHERE friend2='" . $_SESSION['id'] . "' AND accepted='0';");
+                foreach ($friendRequests as $fr) {
+                  $member = getMemberById($fr['friend1']);
+                  echo "<tr>";
+                  echo "<th>" . $member['firstName'] . "</th>";
+                  echo "<th>" . $member['lastName'] . "</th>";
+                  echo "<th><form action='addfriends.php' method='post'>";
+                  echo "<input type='hidden' value='" . $member['memberId'] . "' name='friend1'>";
+                  echo "<input type='submit' value='Accept' name='submit_friend_request_accept'></th>";
+                  echo "<th><input type='submit' value='Reject' name='submit_friend_request_reject'></th>";
+                  echo "</form>";
+                  echo "</tr>";
+
+                if (isset($_POST['submit_friend_request_accept'])) { // if a friend request is ACCEPTED, set accepted to 1
+                  query(
+                    "UPDATE friends SET accepted='1'
+                    WHERE friend1='" . $_POST['friend1'] . "' AND friend2='" . $_SESSION['id'] . "';
+                    "
+                  );
+                } else if (isset($_POST['submit_friend_request_reject'])) { // if a friend request is REJECTED, remove the row in the db
+                  query(
+                    "DELETE FROM friends
+                    WHERE friend1='" . $_POST['friend1'] . "' AND friend2='" . $_SESSION['id'] . "';
+                    "
+                  );
+                }
                   }
                   ?>
               </tbody>
             </table>
           </div>
+          <div>
+            <h4>Send Friend Request</h4>
+            <form action="addfriends.php" method="post">
+              <label>E-mail</label> <input type="text" name="email"> <br>
+              <input type="submit" name="submit_friend_request" value="Request Friendship">
+            </form>
+            <?php
+            require_once("sql.php");
+            if (isset($_POST['submit_friend_request'])) { // if the user just submitted a friend request
+              $friend1 = $_SESSION['id'];
+              $friend2 = -1;
+              $result = getTable("members WHERE email='" . $_POST['email'] . "'"); // look for account with requested e-mail
+              if (count($result) == 0) {
+                echo "<h5><em>Cannot find user with email " . $_POST['email'] . "</em></h5>";
+              } else {
+                $member = $result[0];
+                $friend2 = $member['memberId'];
+                if ($member['memberId'] == $_SESSION['id']) { // if requested e-mail is from signed-in account, throw an error message
+                  echo "<h5><em>Cannot send a friend request to yourself</em></h5>";
+                } else {
+                  // if a friendship or request is already present in the database, throw an error message
+                  $test = getTable("friends WHERE (friend1='" . $_SESSION['id'] . "' AND friend2='$friend2') OR (friend2='" . $_SESSION['id'] . "' AND friend1='$friend2');");
+                  if (count($test) > 0) {
+                    echo "<h5><em>Friendship already going on.</em></h5>";
+                  } else {
+                    // adds request to database
+                    query(
+                      "INSERT INTO friends (friend1, friend2, accepted)
+                      VALUES ('$friend1', '$friend2', '0');"
+                    );
+                    echo "<h5><em>Friendship requested from " . $member['firstName'] . ' ' . $member['lastName'] . "</em></h5>";
+                  }
+                }
+              }
+            }
+            ?>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
     </div>
     <!-- /.container-fluid-->
