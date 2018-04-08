@@ -45,7 +45,7 @@
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav" style="padding-bottom:-10em;">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:0" id="mainNav" style="padding-bottom:-10em;">
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
@@ -245,12 +245,6 @@
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="index.html">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">Blank Page</li>
-      </ol>
       <div class="row">
         <div class="col-12">
           <h1>Blank</h1>
