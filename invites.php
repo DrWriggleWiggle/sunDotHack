@@ -110,9 +110,7 @@
                           <th>Decline</th>
                         </tr>
                       </tfoot>
-                  <div>
-                    <h3>Invitations</h3>
-                    <ul>
+                      <tbody>
                       <?php
                       require_once("sql.php");
                       if (isset($_POST['submit_invite_accept'])){ //if invite is accepted, set accepted to 1
@@ -138,8 +136,6 @@
                        ?>
                       </tbody>
                     </table>
-                   </ul>
-                  </div>
           </div>
         </div>
       </div>
