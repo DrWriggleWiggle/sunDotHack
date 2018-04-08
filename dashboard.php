@@ -71,8 +71,8 @@
           <div id="eventModal" class="modal">
             <div class="modal-content">
               <span class="close">&times;</span>
-              <h2>Event Editor</h2>
-              <form action="index.php" method="post">
+              <h2 style="padding-left:10em">Event Editor</h2>
+              <form action="index.php" method="post" style="padding-left:20em">
                 Event Name: <input type="text" name="event_name"><br>
                 Starts at: <input type="date" name="start_date"> <input type="time" name="start_time"><br>
                 Ends at: <input type="date" name="end_date"> <input type="time" name="end_time"><br>
