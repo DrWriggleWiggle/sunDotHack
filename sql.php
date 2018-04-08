@@ -60,11 +60,11 @@
       return $row;
     }
   }
-
+/*
   function getEventById($val){
     $request = query("SELECT * FROM events WHERE eventId='$val'");
     if ($row = mysqli_fetch_assoc($request)) {
       return $row;
     }
-  }
+  }*/
 ?>
