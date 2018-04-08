@@ -12,6 +12,8 @@
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
@@ -171,11 +173,25 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-      <!-- Breadcrumbs-->
+      <!-- BreadCrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Calendar</li>
+        <li class="breadcrumb-item active">My Events</li>
       </ol>
-        <!-- This is where the calendar goes -->
+      <div class="row">
+        <div class="col-lg">
+          <!-- Card Columns Example Social Feed-->
+          <div class="mb-0 mt-4">
+            <h2>Upcoming</h2></div>
+          <hr class="mt-2">
+          <div class="card-columns">
+        </div>
+        <!--Add events-->
+        <div class="mb-0 mt-4">
+            <h2>Pending</h2></div>
+          <hr class="mt-2">
+          <div class="card-columns">
+        </div>
+      </div>
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
@@ -215,9 +231,12 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Page level plugin JavaScript-->
     <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
+    <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/sb-admin-charts.min.js"></script>
   </div>
 </body>
