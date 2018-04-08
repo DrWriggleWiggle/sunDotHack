@@ -126,6 +126,7 @@
                         echo "</form>";
                         echo "</tr>";
                       }
+                    }
                        ?>
                       </tbody>
                     </table>
