@@ -1,4 +1,4 @@
-0;136;0c<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -168,28 +168,41 @@
                   <th>Last Name</th>
                   <th>Email</th>
                   <th>Calendar</th>
+                  <th>Remove</th>
                 </tr>
               </thead>
+              <tbody>
+              <?php
+                require_once("sql.php");
+                $friends = getFriends($_SESSION['id']);
+                foreach ($friends as $f) {
+                  echo "<tr>";
+                  echo "<td>" . $f['firstName'] . "</td>";
+                  echo "<td>" . $f['lastName'] . "</td>";
+                  echo "<td>" . $f['email'] . "</td>";
+                  echo "<td>";
+                  echo "<form action='friend_calendar.php' method='post' target='_blank'><div>";
+                  echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
+                  echo "<input type='submit' value='View Schedule' name='submit_view_schedule'></div></form>";
+                  echo "</td>";
+                  echo "<td>"
+                  echo "<form action='index.php' method='post'><div>";
+                  echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
+                  echo "<input type='submit' value='Remove' name='submit_friend_request_remove'></div></form>";
+                  echo "</td>";
+                  echo "</tr>";
+                }
+                ?>
+              </tbody>
               <tfoot>
                 <tr>
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Email</th>
                   <th>Calendar</th>
+                  <th>Remove</th>
                 </tr>
-                <?php
-                  require_once("sql.php");
-                  $friends = getFriends($_SESSION['id']);
-                  foreach ($friends as $f) {
-                    echo "<tr>";
-                    echo "<td>" . $f['firstName'] . "</td>";
-                    echo "<td>" . $f['lastName'] . "</td>";
-                    echo "<td>" . $f['email'] . "</td>";
-                    echo "<td>Friend Calendar Link</td>";
-                    echo "</tr>";
-                  }
-                  ?>
-              </tbody>
+              </tfoot>
             </table>
           </div>
         </div>
