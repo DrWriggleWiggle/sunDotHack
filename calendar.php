@@ -117,8 +117,7 @@
 
               $invited_events = getTable("actions WHERE member='" . $_SESSION['id'] . "' AND accepted='1'");
               foreach ($invited_events as $action) {
-                echo $action;
-                echo action_json_encode($action);
+                echo $action['event'];
                 array_push($json_event_list, action_json_encode($action));
               }
 
