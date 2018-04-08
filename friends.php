@@ -2,16 +2,19 @@
 <html lang="en">
 
 <head>
+  <?php require_once("head.php"); ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Wriggle - navbar</title>
+  <title>My Calendar</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
@@ -19,22 +22,22 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="calendar.html">Start Bootstrap</a>
+    <a class="navbar-brand" href="index.html">Wriggle Social Calendar</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="calendar.html">
+          <a class="nav-link" href="dashboard.php">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Dashboard</span>
+            <span class="dashboard.php">My Calendar</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link" href="friends.php">
             <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Charts</span>
+            <span class="nav-link-text">Friends</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
@@ -221,27 +224,54 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">Navbar</li>
-      </ol>
-      <h1>Navbar</h1>
-      <hr>
-      <p>The SB Admin navbar can be either fixed or static, and it supports the navbar-light and navbar-dark Bootstrap 4 classes.</p>
-      <a class="btn btn-primary" href="#" id="toggleNavPosition">Toggle Fixed/Static Navbar</a>
-      <a class="btn btn-primary" href="#" id="toggleNavColor">Toggle Navbar Color</a>
-      <!-- Blank div to give the page height to preview the fixed vs. static navbar-->
-      <div style="height: 1000px;"></div>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Data Table Example</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Calendar</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Calendar</th>
+                </tr>
+                <?php
+                  require_once("sql.php");
+                  $friends = getFriends($_SESSION['id']);
+                  foreach ($friends as $f) {
+                    echo "<tr>";
+                    echo "<td>" . $f['firstName'] . "</td>";
+                    echo "<td>" . $f['lastName'] . "</td>";
+                    echo "<td>" . $f['email'] . "</td>";
+                    echo "<td>Friend Calendar Link</td>";
+                    echo "</li>";
+                    echo "</tr>";
+                  }
+                  ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small>Copyright © Wriggle Social Calendar Corp 2018</small>
         </div>
       </div>
     </footer>
@@ -272,26 +302,13 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
-    <!-- Toggle between fixed and static navbar-->
-    <script>
-    $('#toggleNavPosition').click(function() {
-      $('body').toggleClass('fixed-nav');
-      $('nav').toggleClass('fixed-top static-top');
-    });
-
-    </script>
-    <!-- Toggle between dark and light navbar-->
-    <script>
-    $('#toggleNavColor').click(function() {
-      $('nav').toggleClass('navbar-dark navbar-light');
-      $('nav').toggleClass('bg-dark bg-light');
-      $('body').toggleClass('bg-dark bg-light');
-    });
-
-    </script>
+    <script src="js/sb-admin-datatables.min.js"></script>
   </div>
 </body>
 

@@ -1,5 +1,14 @@
 <!-- consistent title, character set, author, and stylesheets for each page -->
 <title>Social Calendar</title>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117162303-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117162303-1');
+</script>
 <meta charset="utf-8">
 <meta author="DrWriggleWiggle">
 <link rel="stylesheet" href="style.css">
