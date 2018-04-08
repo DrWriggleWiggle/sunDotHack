@@ -94,6 +94,21 @@
             /*var start = dp.visibleStart();
             var end = dp.visibleEnd();
 
+            //TODO replace with our own PHP code to grab event list
+
+            //Test
+            dp.events.list = [
+              {
+                start: "2018-04-07T20:00:00",
+                end: "2018-04-08T08:00:00",
+                id: "1",
+                text: "Dr. Wriggle Wiggle's wiggle party"
+              }
+            ];
+
+            dp.update();
+
+            /*
             $.post("backend_events.php",
             {
                 start: start.toString(),
@@ -103,7 +118,12 @@
                 //console.log(data);
                 dp.events.list = data;
                 dp.update();
+<<<<<<< HEAD
             });*/
+=======
+            });
+            */
+>>>>>>> 692e63bce5dbe106c905737edc27ab76476fb2b0
         }
 
     </script>
