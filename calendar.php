@@ -162,8 +162,6 @@
         });
     });
     </script>
-    <?php echo "<h1>Test</h1>";
-
 </div>
 <div class="clear">
 </div>
