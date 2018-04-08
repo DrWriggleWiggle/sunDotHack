@@ -88,11 +88,11 @@
             <?php
               function event_json_encode($event) {
                 $start = $event['startDate'];
-                $start = str_replace($start, " ", "T");
+                $start = str_replace(" ", "T", $start);
                 $end = $event['endDate'];
-                $end = str_replace($end, " ", "T");
+                $end = str_replace(" ", "T", $end);
                 $id = $event['eventId'];
-                $text = $event['name'] . ' location: ' . $event['location'];
+                $text = $event['name'] . '|location: ' . $event['location'];
 
                 $code = "{";
                 $code .= "start: \"$start\", ";
