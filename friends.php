@@ -173,6 +173,7 @@
               </thead>
               <tbody>
               <?php
+                echo "HELLO";
                 require_once("sql.php");
                 $friends = getFriends($_SESSION['id']);
                 foreach ($friends as $f) {
