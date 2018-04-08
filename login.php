@@ -14,7 +14,7 @@
       $_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
       $_SESSION['id'] = $row['memberId'];
       $_SESSION['email'] = $row['email'];
-      header("Location: index.php");
+      header("Refresh:0");
       exit;
     }
     else {
