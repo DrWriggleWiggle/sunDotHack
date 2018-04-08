@@ -90,9 +90,22 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <div>
-            <h3>Invitations</h3>
-            <ul>
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Accept</th>
+                  <th>Decline</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Description</th>
+                  <th>Accept</th>
+                  <th>Decline</th>
+                </tr>
+              </tfoot>
               <?php
               require_once("sql.php");
               if (isset($_POST['submit_invite_accept'])){ //if invite is accepted, set accepted to 1
@@ -104,19 +117,18 @@
               //$invitations is an array of pending events associated with the current user
               $invitations = getInvites($_SESSION['id']);
               foreach ($invitations as $i) {
-                echo "<li>";
-                echo "Invitation to " . $i['name'];
+                echo "<tr>";
+                echo "<th>Invitation to " . $i['name'] . "</th>";
                 echo "<form action='invites.php' method='post'>";
-                echo "<div>";
                 echo "<input type='hidden' value='" . $i['eventId'] . "' name='event'>";
-                echo "<input type='submit' value='Accept' name='submit_invite_accept'>";
-                echo "<input type='submit' value='Decline' name='submit_invite_decline'>";
-                echo "</div>";
+                echo "<th><input type='submit' value='Accept' name='submit_invite_accept'></th>";
+                echo "<th><input type='submit' value='Decline' name='submit_invite_decline'></th>";
                 echo "</form>";
-                echo "</li>";
+                echo "</tr>";
               }
                ?>
-           </ul>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
