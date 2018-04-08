@@ -114,6 +114,27 @@
                 echo "<h5><em>Friendship with " . $friend['firstName'] . " " . $friend['lastName'] . " has been removed.</em></h5>";
               }
 
+              if (isset($_POST['submit_friend_request_cancel'])) { // if you cancelled a friend request you've sent, remove the row from the db
+                query("DELETE FROM friends WHERE friend2='" . $_POST['friend2'] . "' AND friend1='" . $_SESSION['id'] . "';");
+                $no_friend = getMemberById($_POST['friend2']);
+                echo "<h5><em>Friendship request to " . $no_friend['firstName'] . " " . $no_friend['lastName'] . " has been cancelled.</em></h5>";
+              }
+
+              // find and display friend requests you have sent
+              $friendSubmissions = getTable("friends WHERE friend1='" . $_SESSION['id'] . "' AND accepted='0';");
+              foreach ($friendSubmissions as $fs) {
+                $member = getMemberById($fs['friend2']);
+                echo "<li>";
+                echo "Waiting on friend request sent to " . $member['firstName'] . ' ' . $member['lastName'];
+                echo "<form action='index.php' method='post'>";
+                echo "<div>";
+                echo "<input type='hidden' value='" . $member['memberId'] . "' name='friend2'>";
+                echo "<input type='submit' value='Cancel' name='submit_friend_request_cancel'>";
+                echo "</div>";
+                echo "</form>";
+                echo "</li>";
+              }
+
                 $friends = getFriends($_SESSION['id']);
                 foreach ($friends as $f) {
                   echo "<tr>";
