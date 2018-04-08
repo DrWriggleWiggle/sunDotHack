@@ -214,6 +214,5 @@ echo "<h2>Logged in as $name.</h2>";
   }
 
   header("Refresh:0");
-  exit;
   ?>
 </div>
