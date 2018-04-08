@@ -18,8 +18,8 @@
     $invitations = getTable("actions WHERE member='" . $id . "' AND accepted='0';");
     $data = array();
     foreach ($invitations as $i) {
-      $member = getActionByEventId($i['event']);
-      array_push($data, $member);
+      $event = getEventById($i['event']);
+      array_push($data, $event);
     }
     return $data;
   }
