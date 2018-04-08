@@ -13,7 +13,7 @@
     $row = mysqli_fetch_assoc($result);
     return $row;
   }
-/*
+
   function getInvites($id) {
     $invitations = getTable("actions WHERE member='" . $id . "' AND accepted='0';");
     $data = array();
@@ -22,7 +22,7 @@
       array_push($data, $event);
     }
     return $data;
-  }*/
+  }
 
   function getFriends($id) {
     $friends = getTable("friends WHERE (friend2='" . $id . "' OR friend1='" . $id . "') AND accepted='1';");
@@ -53,11 +53,11 @@
       return $row;
     }
   }
-/*
+
   function getEventById($val){
     $request = query("SELECT * FROM events WHERE eventId='$val'");
     if ($row = mysqli_fetch_assoc($request)) {
       return $row;
     }
-  }*/
+  }
 ?>
