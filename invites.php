@@ -116,7 +116,7 @@
                       if (isset($_POST['submit_invite_accept'])){ //if invite is accepted, set accepted to 1
                       //$invitations is an array of pending events associated with the current user
                       $invitations = getInvites($_SESSION['id']);
-                      print_r($invitations);
+                      echo "<h1> Count = " . count($invitations) . "</h1>";
                       foreach ($invitations as $i) {
                         echo "<tr>";
                         echo "<th>Invitation to " . $i['name'] . "</th>";
