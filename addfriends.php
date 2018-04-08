@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+  if (!isset($_SESSION['id'])) {
+    echo "<meta http-equiv=\"refresh\" content=\"0; index.php\">";
+  }
+ ?>
 
 <head>
   <?php require_once("head.php"); ?>
@@ -226,7 +231,6 @@
             require_once("sql.php");
             if (isset($_POST['submit_friend_request'])) { // if the user just submitted a friend request
               $friend1 = $_SESSION['id'];
-              echo "<h1>Friend1 = $friend1</h1>";
               $friend2 = -1;
               $result = getTable("members WHERE email='" . $_POST['email'] . "'"); // look for account with requested e-mail
               if (count($result) == 0) {
