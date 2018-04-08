@@ -94,11 +94,9 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Calendar</th>
-                  <th>Remove</th>
+                  <th>Description</th>
+                  <th>Accept</th>
+                  <th>Decline</th>
                 </tr>
               </thead>
               <tbody>
@@ -126,11 +124,9 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Calendar</th>
-                  <th>Remove</th>
+                  <th>Description</th>
+                  <th>Accept</th>
+                  <th>Decline</th>
                 </tr>
               </tfoot>
             </table>
