@@ -181,8 +181,9 @@
               <tbody>
               <?php
               if (isset($_POST['submit_friend_request_remove'])) { // if you hit the remove button, remove the friendship row from the db
-                query("DELETE FROM friends WHERE (friend1='" . $_POST['friend'] . "' AND friend2='" . $_SESSION['id'] . "') OR (friend2='" . $_POST['friend'] . "' AND friend1='" . $_SESSION['id'] . "')");
                 echo "<h1>" . $_POST['friend'] . "</h1>";
+                echo "<h1>" . $_SESSION['id'] . "</h1>";
+                query("DELETE FROM friends WHERE (friend1='" . $_POST['friend'] . "' AND friend2='" . $_SESSION['id'] . "') OR (friend2='" . $_POST['friend'] . "' AND friend1='" . $_SESSION['id'] . "')");
                 $friend = getMemberById($_POST['friend']);
                 echo "<h5><em>Friendship with " . $friend['firstName'] . " " . $friend['lastName'] . " has been removed.</em></h5>";
               }
