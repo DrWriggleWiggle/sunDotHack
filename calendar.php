@@ -100,6 +100,7 @@
                 $code .= "id: \"$id\", ";
                 $code .= "text: \"$text\"";
                 $code .= "}";
+                echo "<h1>$code</h1>";
                 return $code;
               }
 
