@@ -166,8 +166,7 @@ echo "<h2>Logged in as $name.</h2>";
   <!-- -->
 
   <!-- Calendar -->
-  echo "<h1>this is where it goes</h1>";
-  <?php require_once("calendar.php"); ?>
+  <?php require("calendar.php"); ?>
 
   <!-- Modal for event creation/edit -->
   <div id="eventModal" class="modal">
