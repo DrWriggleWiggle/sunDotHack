@@ -120,9 +120,9 @@
               }
 
               echo implode(",", $json_event_list);
-              dp.update();
             ?>
           ];
+          dp.update();
             /*var start = dp.visibleStart();
             var end = dp.visibleEnd();
 
