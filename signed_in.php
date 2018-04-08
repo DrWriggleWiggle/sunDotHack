@@ -240,8 +240,54 @@ echo "<h2>Logged in as $name.</h2>";
     }
   }
 
+  function editEvent(){
+    $event_name = $_POST['event_name'];
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+    $start_time = $_POST['start_time'];
+    $end_time = $_POST['end_time'];
+    $location = $_POST['location'];
+    $invite_list = $_POST['invite_list'];
+    $event_id = $_POST['eventId'];
+
+    $start_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
+    $end_date_format = date("Y-m-d H:i:s", strtotime($end_date . ' ' . $end_time));
+
+    // edit event
+    //TODO fix this SQL query
+    query("UPDATE events SET name = '" . $event_name . "',
+                            startDate = '" . $start_date_format . "',
+                            endDate = '" . $end_date_format . "',
+                            location = '" . $location . "'
+                            WHERE eventId = '" . $event_id . "';");
+
+    $events = getLastRow("events", "eventId");
+
+    // invite people to event
+    foreach ($invite_list as $invitee) {
+      $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['eventId'] . "' AND accepted='" . $events['accepted'] . "'");
+      if (count($test) == 0) {
+        query(
+          "INSERT INTO actions (member, event, accepted)
+          VALUES ('$invitee', '" . $events['eventId'] . "', '0');"
+        );
+      }
+    }
+  }
+
   if (isset($_POST['submit_add_event'])) {
     createEvent();
+    usleep(500000);
+    echo "<meta http-equiv=\"refresh\" content=\"0; index.php\">";
+  }
+
+  if(isset($_POST['submit_edit_event'])){
+    editEvent();
+    usleep(500000);
+    echo "<meta http-equiv=\"refresh\" content=\"0; index.php\">";
+  }
+  else if (isset($_POST['submit_delete_event'])){
+    deleteEvent();
     usleep(500000);
     echo "<meta http-equiv=\"refresh\" content=\"0; index.php\">";
   }

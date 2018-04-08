@@ -9,6 +9,32 @@
         <div id="dp"></div>
     </div>
 
+    <!-- Modal for event editing -->
+    <div id="eventModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Event Editor</h2>
+        <form id="editForm" action="index.php" method="post">
+          <input type="hidden" name="eventId" id="eid">
+          Event Name: <input type="text" name="event_name" id="event_name"><br>
+          Starts at: <input type="date" name="start_date" id="start_date"> <input type="time" name="start_time" id="start_time"><br>
+          Ends at: <input type="date" name="end_date" id="end_date"> <input type="time" name="end_time" id="end_time"><br>
+          Location: <input type="text" name="location" id="location"> <br>
+          Invitations:<br>
+          <?php $friends = getFriends($_SESSION['id']); ?>
+          <select name="invite_list[]" size=<?php $num = count($friends); if ($num > 10) {$num = 10;} echo $num; ?> multiple>
+            <?php
+            foreach ($friends as $friend) {
+              echo "<option value='" . $friend['memberId'] . "'>" . $friend['firstName'] . ' ' . $friend['lastName'] . "</option>";
+            }
+            ?>
+          </select>
+          <input type="submit" name="submit_edit_event" value="Update Event" action="./signed_in.php">
+          <input type="submit" name="submit_delete_event" value="Delete Event" action="./signed_in.php">
+        </form>
+      </div>
+    </div>
+
     <script type="text/javascript">
 
         var nav = new DayPilot.Navigator("nav");
@@ -24,6 +50,7 @@
 
         var dp = new DayPilot.Calendar("dp");
         dp.viewType = "Week";
+
         /*
         dp.onEventMoved = function (args) {
             $.post("backend_move.php",
@@ -75,9 +102,6 @@
 
         };
         */
-        dp.onEventClick = function(args) {
-            alert("clicked: " + args.e.id());
-        };
 
         dp.init();
 
@@ -155,6 +179,39 @@
             */
         }
 
+    </script>
+
+    <script>
+      var eModal = document.getElementById("eventModal");
+      var closeBtn = document.getElementsByClassName("close");
+
+      //Event edit handler
+      dp.onEventClick = function(args) {
+        eModal.style.display = "block";
+
+        document.getElementById("eid").value = args.e.id();
+
+        //TODO parse the fields correctly
+        document.getElementById("event_name").value = args.e.text();
+        document.getElementById("start_date").value = args.e.start();
+        document.getElementById("start_time").value = args.e.start();
+        document.getElementById("end_date").value = args.e.end();
+        document.getElementById("end_time").value = args.e.end();
+        document.getElementById("location").value = args.e.text();
+        //alert("clicked: " + args.e.id());
+      };
+
+      for (var i = 0; i < closeBtn.length; ++i) {
+        closeBtn[i].onclick = function(){
+          eModal.style.display = "none";
+        }
+      }
+
+      window.onclick = function(event){
+        if(event.target == eModal){
+          eModal.style.display = "none";
+        }
+      }
     </script>
 
     <script type="text/javascript">
