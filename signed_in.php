@@ -17,13 +17,15 @@ echo "<h2>Logged in as $name.</h2>";
     <h3>Invitations</h3>
     <ul>
     <?php
-    require_once("sql.php");
-    if (isset($_POST['submit_invite_accept'])){
+    /*require_once("sql.php");
+    if (isset($_POST['submit_invite_accept'])){ //if invite is accepted, set accepted to 1
       query("UPDATE actions SET accepted=1 WHERE event='" . $_POST['event'] . "' AND member='" . $_SESSION['id'] . "';")
     }
-    else if(isset($_POST['submit_invite_decline'])){
+    else if(isset($_POST['submit_invite_decline'])){ //if invite is declined, set accepted to 2
       query("UPDATE actions SET accepted=2 WHERE event='" . $_POST['event'] . "' AND member='" . $_SESSION['id'] . "';")
     }
+
+    //$invitations is an array of pending events associated with the current user
     $invitations = getInvites($_SESSION['id']);
     foreach ($invitations as $i) {
       echo "<li>";
@@ -36,7 +38,7 @@ echo "<h2>Logged in as $name.</h2>";
       echo "</div>";
       echo "</form>";
       echo "</li>";
-    }
+    }*/
      ?>
    </ul>
   </div>
