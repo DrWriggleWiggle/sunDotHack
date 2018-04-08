@@ -100,13 +100,12 @@
                 $code .= "id: \"$id\", ";
                 $code .= "text: \"$text\"";
                 $code .= "}";
-                echo "<h1>$code</h1>";
                 return $code;
               }
 
               function action_json_encode($action) {
                 $event = getTable("events WHERE eventId='" . $action['event'] . "'");
-                event_json_encode($event);
+                event_json_encode($event[0]);
               }
 
               require_once("sql.php");
