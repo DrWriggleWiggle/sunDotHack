@@ -213,6 +213,6 @@ echo "<h2>Logged in as $name.</h2>";
     createEvent();
   }
 
-  echo "<meta http-equiv=\"refresh\" content=\"0; index.php\">";
+  //echo "<meta http-equiv=\"refresh\" content=\"0; index.php\">";
   ?>
 </div>
