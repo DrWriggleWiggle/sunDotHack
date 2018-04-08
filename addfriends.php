@@ -109,6 +109,7 @@
                   <th>Accept</th>
                   <th>Ignore</th>
                 </tr>
+              </tfoot>
                 <?php
                 require_once("sql.php");
                 $friendRequests = getTable("friends WHERE friend2='" . $_SESSION['id'] . "' AND accepted='0';");
