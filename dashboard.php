@@ -57,17 +57,19 @@
             <span class="nav-link-text">My Calendar</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="friends.php">
-            <i class="fa fa-fw fa-area-chart"></i>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">Friends</span>
           </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Tables</span>
-          </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li>
+              <a href="friends.php">My Friends</a>
+            </li>
+            <li>
+              <a href="addfriends.php">Add Friend</a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
