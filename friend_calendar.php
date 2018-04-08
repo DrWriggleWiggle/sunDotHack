@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <?php require_once("head.php");?>
+</head>
+<html lang="en">
+<body>
 <div class="shadow"></div>
 <div class="hideSkipLink">
 </div>
@@ -169,3 +176,5 @@
 </div>
 <div class="clear">
 </div>
+</body>
+</html>

@@ -137,7 +137,7 @@ echo "<h2>Logged in as $name.</h2>";
     }
 
     if (isset($_POST['submit_view_schedule'])) {
-      require("friend_calendar.php");
+      echo "<meta http-equiv=\"refresh\" content=\"0; friend_calendar.php\">";
     }
 
     // find and display your friends
@@ -149,7 +149,7 @@ echo "<h2>Logged in as $name.</h2>";
       echo "<div>";
       echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
       echo "<input type='submit' value='Remove' name='submit_friend_request_remove'>";
-      echo "<input type='submit' value='View Schedule' name='submit_view_schedule'>";
+      echo "<input type='submit' value='View Schedule' name='submit_view_schedule' target='_blank'>";
       echo "</div>";
       echo "</form>";
       echo "</li>";
