@@ -68,6 +68,7 @@ body.fixed-nav {
 #mainNav .navbar-collapse {
   overflow: auto;
   max-height: 75vh;
+  padding-bottom: 30vh;
 }
 
 #mainNav .navbar-collapse .navbar-nav .nav-item .nav-link {
@@ -162,7 +163,7 @@ body.fixed-nav {
   }
   #mainNav .navbar-collapse .navbar-sidenav > .nav-item {
     width: 250px;
-    padding: 0;
+    padding: 0px;
   }
   #mainNav .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
     padding: 1em;

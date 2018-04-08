@@ -21,47 +21,36 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Register a Social Calendar Account</div>
       <div class="card-body">
-        <form>
+        <form method="post">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <label>First name</label>
-                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter first name" name="firstName">
+                <input class="form-control" type="text" name="firstName">
               </div>
               <div class="col-md-6">
                 <label >Last name</label>
-                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Enter last name" name="lastName">
+                <input class="form-control" type="text" name="lastName">
               </div>
             </div>
           </div>
           <div class="form-group">
             <label>Email address</label>
-            <input class="form-control" id="exampleInputEmail1" type="text" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+            <input class="form-control" type="text" name="email">
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputPassword1">Password</label>
-                <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password" name="password">
+                <input class="form-control" type="password" name="password">
               </div>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="signed_out.php">Register</a>
-			<?php
-				if (isset($_POST['submit_register'])) { // if a registration has been submitted, create account and refresh
-				$first_name = $_POST["firstName"];
-				$last_name = $_POST["lastName"];
-				$email = $_POST["email"];
-				$password = $_POST["password"];
-				query(
-				"INSERT INTO members (firstName, lastName, email, password)
-				VALUES ('$first_name', '$last_name', '$email', SHA('$password'));
-				"
-				);
-				header("Refresh:0");
-				}
-            ?>
+          <input class="btn btn-primary btn-block" name="submit_register" type="submit" value="Create Account">
         </form>
+	  	<div class="text-center">
+	  		<a class="d-block small mt-3" href="signed_out.php">Login</a>
+	  	</div>
       </div>
     </div>
   </div>
@@ -71,5 +60,18 @@
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
-
+<?php
+			require_once("sql.php");
+			if (isset($_POST['submit_register'])) { // if a registration has been submitted, create account and refresh
+				$first_name = $_POST["firstName"];
+				$last_name = $_POST["lastName"];
+				$email = $_POST["email"];
+				$password = $_POST["password"];
+				query(
+				"INSERT INTO members (firstName, lastName, email, password)
+				VALUES ('$first_name', '$last_name', '$email', SHA('$password'));
+				");
+				echo "<meta http-equiv=\"refresh\" content=\"0; signed_out.php\">";
+			}
+?>
 </html>
