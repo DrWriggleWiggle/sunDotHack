@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+  session_start();
+  if (!isset($_SESSION['id'])) {
+    echo "<meta http-equiv=\"refresh\" content=\"0; index.php\">";
+  }
+ ?>
+
 <head>
   <?php require_once("head.php"); ?>
   <meta charset="utf-8">
