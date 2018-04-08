@@ -218,11 +218,9 @@ echo "<h2>Logged in as $name.</h2>";
            VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date_format', '$end_date_format', '$location');
       ");
 
-    echo "<h1>" . count($invite_list) . "</h1>";
-
     // invite people to event
     foreach ($invite_list as $invitee) {
-      $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['event'] . "' AND accepted='" . $events['accepted'] . "'");
+      $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['eventId'] . "' AND accepted='" . $events['accepted'] . "'");
       if (count($test) == 0) {
         query(
           "INSERT INTO actions (member, event, accepted)
