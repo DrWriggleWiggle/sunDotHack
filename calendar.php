@@ -84,13 +84,32 @@
         loadEvents();
 
         function loadEvents() {
-            //var start = dp.visibleStart();
-            //var end = dp.visibleEnd();
           dp.events.list = [
             <?php
+              function event_json_encode($event) {
+                $start = $event['startDate'];
+                $start = str_replace($start, " ", "T");
+                $end = $event['endDate'];
+                $end = str_replace($end, " ", "T");
+                $id = $event['eventId'];
+                $text = $event['name'] . ' location: ' . $event['location'];
+
+                $code = "{";
+                $code .= "start: \"$start\", ";
+                $code .= "end: \"$end\", ";
+                $code .= "id: \"$id\", ";
+                $code .= "text: \"$text\"";
+                $code .= "}";
+                return $code;
+              }
+
               require_once("sql.php");
               $owned_events = getTable("events WHERE owner='" . $_SESSION['id'] . "'");
-              echo json_encode($owned_events);
+              $json_event_list = array();
+              foreach ($owned_events as $event) {
+                array_push($json_event_list, event_json_encode($event));
+              }
+              echo implode(",", $json_event_list);
             ?>
           ];
             /*var start = dp.visibleStart();
