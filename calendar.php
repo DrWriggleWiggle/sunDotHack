@@ -109,8 +109,6 @@
               foreach ($owned_events as $event) {
                 array_push($json_event_list, event_json_encode($event));
               }
-              $invited_events = getTable("actions WHERE member='" $_SESSION['id'] . "' AND accepted='1'");
-
               echo implode(",", $json_event_list);
             ?>
           ];
