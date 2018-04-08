@@ -1,7 +1,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.php">Wriggle Social Calendar</a>
+    <a class="navbar-brand" href="index.html">Wriggle Social Calendar</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,7 +14,7 @@
 	  </a>
 	</li>
   <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-  <a class="nav-link" href="index.php">
+  <a class="nav-link" href="invites.php">
   <i class="fa fa-fw fa-dashboard"></i>
   <span class="invites.php">Invites</span>
   </a>
@@ -71,33 +71,23 @@
           <div id="eventModal" class="modal">
             <div class="modal-content">
               <span class="close">&times;</span>
-				<h2 style="padding-left:10em">Event Editor</h2>
-				<form action="index.php" method="post" style="padding-left:20em">
-                Event Name: <input type="text" name="event_name">
-					<br />
-					Starts at:
-					<input type="date" name="start_date" />
-					<input type="time" name="start_time" />
-					<br />
-					Ends at:
-					<input type="date" name="end_date" />
-					<input type="time" name="end_time" />
-					<br />
-					Location:
-					<input type="text" name="location" />
-					<br />
-					Invitations:
-					<br />
-					<?php $friends = getFriends($_SESSION['id']); ?>
-					<select name="invite_list[]" size=<?php $num = count($friends); if ($num > 10) {$num = 10;} echo $num; ?> multiple>
-						<?php
+              <h2>Event Editor</h2>
+              <form action="index.php" method="post">
+                Event Name: <input type="text" name="event_name"><br>
+                Starts at: <input type="date" name="start_date"> <input type="time" name="start_time"><br>
+                Ends at: <input type="date" name="end_date"> <input type="time" name="end_time"><br>
+                Location: <input type="text" name="location"> <br>
+                Invitations:<br>
+                <?php $friends = getFriends($_SESSION['id']); ?>
+                <select name="invite_list[]" size=<?php $num = count($friends); if ($num > 10) {$num = 10;} echo $num; ?> multiple>
+                  <?php
                   foreach ($friends as $friend) {
                     echo "<option value='" . $friend['memberId'] . "'>" . $friend['firstName'] . ' ' . $friend['lastName'] . "</option>";
                   }
-						?>
-					</select>
-					<input type="submit" name="submit_add_event" value="Add Event" />
-				</form>
+                  ?>
+                </select>
+                <input type="submit" name="submit_add_event" value="Add Event">
+              </form>
             </div>
           </div>
           <button id="add_event">Add Event</button>
@@ -189,7 +179,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.php">Logout</a>
+            <a class="btn btn-primary" href="login.html">Logout</a>
           </div>
         </div>
       </div>
