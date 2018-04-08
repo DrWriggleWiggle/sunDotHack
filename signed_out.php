@@ -47,9 +47,7 @@
     </section>
     <footer class="sticky-footer">
       <div class="container">
-        <div class="text-center">
           <a href="begin.html"<small>Copyright © Wriggle Social Calendar Corp 2018</small></a>
-        </div>
       </div>
     </footer>
 
