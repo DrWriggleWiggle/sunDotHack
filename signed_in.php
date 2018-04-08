@@ -218,6 +218,8 @@ echo "<h2>Logged in as $name.</h2>";
            VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date_format', '$end_date_format', '$location');
       ");
 
+    $events = getLastRow("events", "eventId");
+
     // invite people to event
     foreach ($invite_list as $invitee) {
       $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['eventId'] . "' AND accepted='" . $events['accepted'] . "'");
