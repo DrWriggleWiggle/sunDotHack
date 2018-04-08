@@ -17,35 +17,12 @@
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-  <style>
-  .modal{
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: grba(0,0,0,0.4);
-    color: black;
-  }
-
-  .modal-content{
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
-  </style>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Wriggle Social Calendar</a>
+    <a class="navbar-brand" href="dashboard.html">Wriggle Social Calendar</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -54,7 +31,7 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="dashboard.php">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">My Calendar</span>
+            <span class="dashboard.php">My Calendar</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
@@ -68,20 +45,6 @@
             </li>
             <li>
               <a href="addfriends.php">Add Friend</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Components</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="navbar.html">Navbar</a>
-            </li>
-            <li>
-              <a href="cards.html">Cards</a>
             </li>
           </ul>
         </li>
@@ -249,89 +212,97 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <?php require_once("calendar.php"); ?>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Pending Friend Requests</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Accept</th>
+                  <th>Ignore</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Accept</th>
+                  <th>Ignore</th>
+                </tr>
+                <?php
+                require_once("sql.php");
+                $friendRequests = getTable("friends WHERE friend2='" . $_SESSION['id'] . "' AND accepted='0';");
+                foreach ($friendRequests as $fr) {
+                  $member = getMemberById($fr['friend1']);
+                  echo "<tr>";
+                  echo "<th>" . $member['firstName'] . "</th>";
+                  echo "<th>" . $member['lastName'] . "</th>";
+                  echo "<th><form action='addfriends.php' method='post'>";
+                  echo "<input type='hidden' value='" . $member['memberId'] . "' name='friend1'>";
+                  echo "<input type='submit' value='Accept' name='submit_friend_request_accept'></th>";
+                  echo "<th><input type='submit' value='Reject' name='submit_friend_request_reject'></th>";
+                  echo "</form>";
+                  echo "</tr>";
 
-          <!-- Modal for event creation/edit -->
-          <div id="eventModal" class="modal">
-            <div class="modal-content">
-              <span class="close">&times;</span>
-              <h2>Event Editor</h2>
-              <form action="index.php" method="post">
-                Event Name: <input type="text" name="event_name"><br>
-                Starts at: <input type="date" name="start_date"> <input type="time" name="start_time"><br>
-                Ends at: <input type="date" name="end_date"> <input type="time" name="end_time"><br>
-                Location: <input type="text" name="location"> <br>
-                Invitations:<br>
-                <?php $friends = getFriends($_SESSION['id']); ?>
-                <select name="invite_list" size=<?php $num = count($friends); if ($num > 10) {$num = 10;} echo $num; ?> multiple>
-                  <?php
-                  foreach ($friends as $friend) {
-                    echo "<option value='" . $friend['memberId'] . "'>" . $friend['firstName'] . ' ' . $friend['lastName'] . "</option>";
+                if (isset($_POST['submit_friend_request_accept'])) { // if a friend request is ACCEPTED, set accepted to 1
+                  query(
+                    "UPDATE friends SET accepted='1'
+                    WHERE friend1='" . $_POST['friend1'] . "' AND friend2='" . $_SESSION['id'] . "';
+                    "
+                  );
+                } else if (isset($_POST['submit_friend_request_reject'])) { // if a friend request is REJECTED, remove the row in the db
+                  query(
+                    "DELETE FROM friends
+                    WHERE friend1='" . $_POST['friend1'] . "' AND friend2='" . $_SESSION['id'] . "';
+                    "
+                  );
+                }
                   }
                   ?>
-                </select>
-                <input type="submit" name="submit_add_event" value="Add Event">
-              </form>
-            </div>
+              </tbody>
+            </table>
           </div>
-          <button id="add_event">Add Event</button>
-          <script>
-            var eModal = document.getElementById("eventModal");
-            var addBtn = document.getElementById("add_event");
-            var closeBtn = document.getElementsByClassName("close");
-
-            addBtn.onclick = function(){
-              eModal.style.display = "block";
-            }
-
-            for (var i = 0; i < closeBtn.length; ++i) {
-              closeBtn[i].onclick = function(){
-                eModal.style.display = "none";
+          <div>
+            <h4>Send Friend Request</h4>
+            <form action="addfriends.php" method="post">
+              <label>E-mail</label> <input type="text" name="email"> <br>
+              <input type="submit" name="submit_friend_request" value="Request Friendship">
+            </form>
+            <?php
+            require_once("sql.php");
+            if (isset($_POST['submit_friend_request'])) { // if the user just submitted a friend request
+              $friend1 = $_SESSION['id'];
+              $friend2 = -1;
+              $result = getTable("members WHERE email='" . $_POST['email'] . "'"); // look for account with requested e-mail
+              if (count($result) == 0) {
+                echo "<h5><em>Cannot find user with email " . $_POST['email'] . "</em></h5>";
+              } else {
+                $member = $result[0];
+                $friend2 = $member['memberId'];
+                if ($member['memberId'] == $_SESSION['id']) { // if requested e-mail is from signed-in account, throw an error message
+                  echo "<h5><em>Cannot send a friend request to yourself</em></h5>";
+                } else {
+                  // if a friendship or request is already present in the database, throw an error message
+                  $test = getTable("friends WHERE (friend1='" . $_SESSION['id'] . "' AND friend2='$friend2') OR (friend2='" . $_SESSION['id'] . "' AND friend1='$friend2');");
+                  if (count($test) > 0) {
+                    echo "<h5><em>Friendship already going on.</em></h5>";
+                  } else {
+                    // adds request to database
+                    query(
+                      "INSERT INTO friends (friend1, friend2, accepted)
+                      VALUES ('$friend1', '$friend2', '0');"
+                    );
+                    echo "<h5><em>Friendship requested from " . $member['firstName'] . ' ' . $member['lastName'] . "</em></h5>";
+                  }
+                }
               }
             }
-
-            window.onclick = function(event){
-              if(event.target == eModal){
-                eModal.style.display = "none";
-              }
-            }
-          </script>
-          <?php
-          function createEvent() {
-            $event_name = $_POST['event_name'];
-            $start_date = $_POST['start_date'];
-            $end_date = $_POST['end_date'];
-            $start_time = $_POST['start_time'];
-            $end_time = $_POST['end_time'];
-            $location = $_POST['location'];
-            $invite_list = $_POST['invite_list'];
-
-            $start_date_format = date("Y-m-d", strtotime($start_date));
-            $end_date_format = date("Y-m-d H:i:s", strtotime($start_date . ' ' . $start_time));
-
-            // create event
-            query("INSERT INTO events (owner, name, startDate, endDate, location)
-                   VALUES ('" . $_SESSION['id'] . "', '$event_name', '$start_date_format', '$end_date_format', '$location');
-              ");
-
-            // invite people to event
-            foreach ($invite_list as $invitee) {
-              $test = getTable("actions WHERE member='" . $events['member'] . "' AND event='" . $events['event'] . "' AND accepted='" . $events['accepted'] . "'");
-              if (count($test) == 0) {
-                query(
-                  "INSERT INTO actions (member, event, accepted)
-                  VALUES ('$invitee', '" . $events['eventId'] . "', '0');"
-                );
-              }
-            }
-          }
-
-          if (isset($_POST['submit_add_event'])) {
-            createEvent();
-          }
-          ?>
+            ?>
         </div>
       </div>
     </div>
