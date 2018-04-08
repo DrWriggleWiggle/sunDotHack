@@ -119,19 +119,12 @@
                       foreach ($invitations as $i) {
                         echo "<tr>";
                         echo "<th>Invitation to " . $i['name'] . "</th>";
-                        echo "<li>";
-                        echo "Invitation to " . $i['name'];
                         echo "<form action='invites.php' method='post'>";
-                        echo "<div>";
                         echo "<input type='hidden' value='" . $i['eventId'] . "' name='event'>";
                         echo "<th><input type='submit' value='Accept' name='submit_invite_accept'></th>";
                         echo "<th><input type='submit' value='Decline' name='submit_invite_decline'></th>";
-                        echo "<input type='submit' value='Accept' name='submit_invite_accept'>";
-                        echo "<input type='submit' value='Decline' name='submit_invite_decline'>";
-                        echo "</div>";
                         echo "</form>";
                         echo "</tr>";
-                        echo "</li>";
                       }
                        ?>
                       </tbody>
