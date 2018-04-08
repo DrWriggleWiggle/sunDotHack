@@ -100,7 +100,6 @@
                 $code .= "id: \"$id\", ";
                 $code .= "text: \"$text\"";
                 $code .= "}";
-                echo "<h1>$code</h1>";
                 return $code;
               }
 
@@ -113,7 +112,9 @@
               $owned_events = getTable("events WHERE owner='" . $_SESSION['id'] . "'");
               $json_event_list = array();
               foreach ($owned_events as $event) {
-                array_push($json_event_list, event_json_encode($event));
+                $test = event_json_encode($event);
+                echo "<h1>$test</h1>";
+                array_push($json_event_list, $test);
               }
 
               $invited_events = getTable("actions WHERE member='" . $_SESSION['id'] . "' AND accepted='1'");
