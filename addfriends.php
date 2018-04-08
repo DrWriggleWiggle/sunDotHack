@@ -112,19 +112,6 @@
               </tfoot>
                 <?php
                 require_once("sql.php");
-                $friendRequests = getTable("friends WHERE friend2='" . $_SESSION['id'] . "' AND accepted='0';");
-                foreach ($friendRequests as $fr) {
-                  $member = getMemberById($fr['friend1']);
-                  echo "<tr>";
-                  echo "<th>" . $member['firstName'] . "</th>";
-                  echo "<th>" . $member['lastName'] . "</th>";
-                  echo "<th><form action='addfriends.php' method='post'>";
-                  echo "<input type='hidden' value='" . $member['memberId'] . "' name='friend1'>";
-                  echo "<input type='submit' value='Accept' name='submit_friend_request_accept'></th>";
-                  echo "<th><input type='submit' value='Reject' name='submit_friend_request_reject'></th>";
-                  echo "</form>";
-                  echo "</tr>";
-
                 if (isset($_POST['submit_friend_request_accept'])) { // if a friend request is ACCEPTED, set accepted to 1
                   query(
                     "UPDATE friends SET accepted='1'
@@ -138,6 +125,19 @@
                     "
                   );
                 }
+
+                $friendRequests = getTable("friends WHERE friend2='" . $_SESSION['id'] . "' AND accepted='0';");
+                foreach ($friendRequests as $fr) {
+                  $member = getMemberById($fr['friend1']);
+                  echo "<tr>";
+                  echo "<th>" . $member['firstName'] . "</th>";
+                  echo "<th>" . $member['lastName'] . "</th>";
+                  echo "<th><form action='addfriends.php' method='post'>";
+                  echo "<input type='hidden' value='" . $member['memberId'] . "' name='friend1'>";
+                  echo "<input type='submit' value='Accept' name='submit_friend_request_accept'></th>";
+                  echo "<th><input type='submit' value='Reject' name='submit_friend_request_reject'></th>";
+                  echo "</form>";
+                  echo "</tr>";
                   }
                   ?>
               </tbody>
