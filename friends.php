@@ -193,11 +193,17 @@
                   echo "<input type='submit' value='View Schedule' name='submit_view_schedule'></div></form>";
                   echo "</td>";
                   echo "<td>";
-                  echo "<form action='index.php' method='post'><div>";
+                  echo "<form action='friends.php' method='post'><div>";
                   echo "<input type='hidden' value='" . $f['memberId'] . "' name='friend'>";
                   echo "<input type='submit' value='Remove' name='submit_friend_request_remove'></div></form>";
                   echo "</td>";
                   echo "</tr>";
+                }
+
+                if (isset($_POST['submit_friend_request_remove'])) { // if you hit the remove button, remove the friendship row from the db
+                  query("DELETE FROM friends WHERE (friend1='" . $_POST['friend'] . "' AND friend2='" . $_SESSION['id'] . "') OR (friend2='" . $_POST['friend'] . "' AND friend1='" . $_SESSION['id'] . "')");
+                  $friend = getMemberById($_POST['friend']);
+                  echo "<h5><em>Friendship with " . $friend['firstName'] . " " . $friend['lastName'] . " has been removed.</em></h5>";
                 }
                 ?>
               </tbody>
