@@ -137,7 +137,7 @@ echo "<h2>Logged in as $name.</h2>";
     }
 
     if (isset($_POST['submit_view_schedule'])) {
-      //require("schedule_view.php");
+      require("schedule_view.php");
     }
 
     // find and display your friends
