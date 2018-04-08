@@ -14,7 +14,8 @@
       $_SESSION['user'] = $row['firstName'] . ' ' . $row['lastName'];
       $_SESSION['id'] = $row['memberId'];
       $_SESSION['email'] = $row['email'];
-      echo "<meta http-equiv=\"refresh\" content=\"0; index.php\">";
+      header("Location: index.php");
+      exit;
     }
     else {
       echo "<script type=\"text/javascript\">
