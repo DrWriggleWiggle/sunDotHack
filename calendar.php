@@ -85,9 +85,24 @@
         loadEvents();
 
         function loadEvents() {
-            var start = dp.visibleStart();
-            var end = dp.visibleEnd();
+            //var start = dp.visibleStart();
+            //var end = dp.visibleEnd();
 
+            //TODO replace with our own PHP code to grab event list
+
+            //Test
+            dp.events.list = [
+              {
+                start: "2018-04-08:T09:00:00",
+                end: "2018-04-08T11:00:00",
+                id: "1",
+                text: "Dr. Wriggle Wiggle's wiggle party"
+              }
+            ];
+
+            dp.update();
+
+            /*
             $.post("backend_events.php",
             {
                 start: start.toString(),
@@ -98,6 +113,7 @@
                 dp.events.list = data;
                 dp.update();
             });
+            */
         }
 
     </script>
