@@ -1,5 +1,5 @@
 <?php
-  $dbc = mysqli_connect("localhost", "root", "sunhacks", "socialcalendar") or die("<h1>Error Connecting to Database</h1>");
+  $dbc = mysqli_connect("localhost", "root", "", "socialcalendar") or die("<h1>Error Connecting to Database</h1>");
 
   function query($q_string) {
     global $dbc;
