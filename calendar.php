@@ -76,7 +76,7 @@
         };
         */
         dp.onEventClick = function(args) {
-            alert(alert("" + args.e.text()));
+            alert("" + args.e.text());
         };
 
         dp.init();
